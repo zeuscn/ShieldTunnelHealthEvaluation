@@ -27,7 +27,8 @@ namespace ShielTunnelHealthEvaluation.UI
         private void btnSerialization_Click(object sender, RoutedEventArgs e)
         {
             Hierarchy testHierarchy = new Hierarchy();
-            testHierarchy.OutputXml();
+            //testHierarchy.OutputXml();
+            testHierarchy.ReadXml();
         }
     }
 }

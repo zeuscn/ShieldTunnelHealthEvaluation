@@ -37,8 +37,16 @@
     <StartupObject>ShielTunnelHealthEvaluation.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.8.0\lib\net35\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +56,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CORE\FuzzyAHP\FuzzyOperator.cs" />
+    <Compile Include="CORE\FuzzyAHP\HealthLevel.cs" />
+    <Compile Include="CORE\FuzzyAHP\JudgementMatrix.cs" />
+    <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
+    <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
     <Compile Include="UI\TestWnd.xaml.cs">
       <DependentUpon>TestWnd.xaml</DependentUpon>
     </Compile>
@@ -95,6 +108,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

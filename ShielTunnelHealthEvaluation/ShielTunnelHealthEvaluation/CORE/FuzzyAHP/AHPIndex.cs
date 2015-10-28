@@ -11,8 +11,10 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     {
         public string Name { get; set; }
         public AHPIndexType IndexType { get; set; }
+        [XmlIgnore]
         public object OriginValue { get; set; }
         public IndexStardrizationType StdType { get; set; }
+        [XmlIgnore]
         public double Value { get; set; }
         [XmlIgnore]
         public AHPIndex Parent { get; set; }
