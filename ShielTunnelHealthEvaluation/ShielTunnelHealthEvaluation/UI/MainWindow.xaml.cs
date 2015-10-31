@@ -23,5 +23,15 @@ namespace ShielTunnelHealthEvaluation
         {
             InitializeComponent();
         }
+
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnWeight_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

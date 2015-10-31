@@ -7,25 +7,27 @@ using System.Xml.Serialization;
 namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     [Serializable]
-    public class AHPIndex
+    public class AHPIndexHierarchy
     {
         public string Name { get; set; }
-        public AHPIndexType IndexType { get; set; }
+        public AHPIndexValueType IndexType { get; set; }
         [XmlIgnore]
         public object OriginValue { get; set; }
         public IndexStardrizationType StdType { get; set; }
         [XmlIgnore]
         public double Value { get; set; }
         [XmlIgnore]
-        public AHPIndex Parent { get; set; }
-        public List<AHPIndex> Children { get; set; }
-        public AHPIndex()
+        public List<string> ChildrenNames { get; set; }
+        [XmlIgnore]
+        public AHPIndexHierarchy Parent { get; set; }
+        public List<AHPIndexHierarchy> Children { get; set; }
+        public AHPIndexHierarchy()
         {
-            Children = new List<AHPIndex>();
+            Children = new List<AHPIndexHierarchy>();
         }
 
     }
-    public enum AHPIndexType
+    public enum AHPIndexValueType
     {
         Undefined=0,
         Text=1,

@@ -8,7 +8,7 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     [Serializable]
     public class Hierarchy
     {
-        public AHPIndex TunnelHealIndex { get; set; }
+        public AHPIndexHierarchy TunnelHealIndex { get; set; }
         public Hierarchy()
         {
             //TunnelHealIndex = new AHPIndex()
@@ -40,14 +40,14 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         }
         public void OutputXml()
         {
-            Serialization<AHPIndex> AHPIndex2Xml = new Serialization<AHPIndex>();
+            Serialization<AHPIndexHierarchy> AHPIndex2Xml = new Serialization<AHPIndexHierarchy>();
             string filePath=@"..\..\Resources\Hierarchy.xml";
             //AHPIndex2Xml.XMLSerialization(filePath, TunnelHealIndex);
             AHPIndex2Xml.XMLSerialization(filePath, TunnelHealIndex);
         }
         public void ReadXml()
         {
-            Serialization<AHPIndex> Xml2AHPIndex = new Serialization<AHPIndex>();
+            Serialization<AHPIndexHierarchy> Xml2AHPIndex = new Serialization<AHPIndexHierarchy>();
             string filePath = @"..\..\Resources\Hierarchy.xml"; ;
             TunnelHealIndex = Xml2AHPIndex.XMLDeserialization(filePath);
         }

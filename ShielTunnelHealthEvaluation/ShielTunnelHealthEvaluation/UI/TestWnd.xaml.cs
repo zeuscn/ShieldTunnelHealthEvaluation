@@ -30,5 +30,11 @@ namespace ShielTunnelHealthEvaluation.UI
             //testHierarchy.OutputXml();
             testHierarchy.ReadXml();
         }
+
+        private void btnTestWeigh_Click(object sender, RoutedEventArgs e)
+        {
+            Weight testWei = new Weight();
+            testWei.Show();
+        }
     }
 }
