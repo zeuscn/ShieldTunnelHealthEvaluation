@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShielTunnelHealthEvaluation.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace ShielTunnelHealthEvaluation
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new MainWindowViewModel();
+            this.DataContext = viewModel;
         }
 
         private void btnSetting_Click(object sender, RoutedEventArgs e)
@@ -31,7 +35,8 @@ namespace ShielTunnelHealthEvaluation
 
         private void btnWeight_Click(object sender, RoutedEventArgs e)
         {
-
+            JudgementMatrixWnd weightWnd = new JudgementMatrixWnd(viewModel.MyAHPIndexHierarachys[0]);
+            weightWnd.Show();
         }
     }
 }

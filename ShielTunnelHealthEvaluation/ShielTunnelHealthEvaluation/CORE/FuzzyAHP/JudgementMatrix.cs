@@ -52,19 +52,24 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     {
         public string ExpertName { get; set; }
         public DateTime Time { get; set; }
-        public List<JudgementMatrixInfo> JudgeMatrixSet { get; set; }
+        public Dictionary<string,JudgementMatrixInfo> JudgeMatrixDic { get; set; }
         public JudgementMatrixInfos()
         {
         }
         public JudgementMatrixInfos(AHPIndexHierarchy ahpIndexHierarchy)
         {
-
+            JudgeMatrixDic = new Dictionary<string, JudgementMatrixInfo>();
+            InitialData(ahpIndexHierarchy);
         }
         public void InitialData(AHPIndexHierarchy ahpIndexHierarchy)
         {
-            JudgementMatrixInfo JudgeMatrixInfo = new JudgementMatrixInfo();
-            JudgeMatrixInfo.IndexsSequence = ahpIndexHierarchy.ChildrenNames;
-            JudgeMatrixSet.Add(JudgeMatrixInfo);
+            if(ahpIndexHierarchy.Children==null||ahpIndexHierarchy.Children.Count<1)
+            {
+                return;
+            }
+            JudgementMatrixInfo judgeMatrixInfo = new JudgementMatrixInfo();
+            judgeMatrixInfo.IndexsSequence = ahpIndexHierarchy.ChildrenNames;
+            JudgeMatrixDic.Add(ahpIndexHierarchy.Name,judgeMatrixInfo);
             if(ahpIndexHierarchy.Children!=null&&ahpIndexHierarchy.Children.Count>0)
             {
                 foreach(AHPIndexHierarchy item in ahpIndexHierarchy.Children)
@@ -72,6 +77,15 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
                     InitialData(item);
                 }
             }
+        }
+    }
+    [Serializable]
+    public class JudgementMatrixInfosSet
+    {
+        public  List<JudgementMatrixInfos> JudgementMatrixInfoSet { get; set; }
+        public JudgementMatrixInfosSet()
+        {
+            this.JudgementMatrixInfoSet = new List<JudgementMatrixInfos>();
         }
     }
 }

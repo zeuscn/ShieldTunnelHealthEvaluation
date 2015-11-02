@@ -1,31 +1,27 @@
 <?xml version="1.0"?>
-<AHPIndex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<AHPIndexHierarchy xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>TunnelHealth</Name>
   <IndexType>SingleValue</IndexType>
   <StdType>Undefined</StdType>
-  <Value>0</Value>
   <Children>
-    <AHPIndex>
+    <AHPIndexHierarchy>
       <Name>Level1</Name>
       <IndexType>SingleValue</IndexType>
       <StdType>Undefined</StdType>
-      <Value>0</Value>
       <Children>
-        <AHPIndex>
+        <AHPIndexHierarchy>
           <Name>level2Node1</Name>
           <IndexType>Text</IndexType>
           <StdType>Undefined</StdType>
-          <Value>0</Value>
           <Children />
-        </AHPIndex>
-        <AHPIndex>
+        </AHPIndexHierarchy>
+        <AHPIndexHierarchy>
           <Name>level2Node2</Name>
           <IndexType>SeriesValue</IndexType>
           <StdType>Undefined</StdType>
-          <Value>0</Value>
           <Children />
-        </AHPIndex>
+        </AHPIndexHierarchy>
       </Children>
-    </AHPIndex>
+    </AHPIndexHierarchy>
   </Children>
-</AHPIndex>
+</AHPIndexHierarchy>

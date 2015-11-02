@@ -1,0 +1,19 @@
+﻿<Window x:Class="ShielTunnelHealthEvaluation.UI.WeightWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:reoGrid="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
+        xmlns:local="clr-namespace:ShielTunnelHealthEvaluation.UI"
+        Title="Weight" Height="Auto" Width="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <UserControl Grid.Column="0">
+            <local:IndexTreeUserControl1></local:IndexTreeUserControl1>
+        </UserControl>
+        <UserControl Grid.Column="1">
+            <local:JudgementMatrixWnd x:Name="judgeMatrixUC"></local:JudgementMatrixWnd>
+        </UserControl>
+    </Grid>
+</Window>

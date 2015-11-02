@@ -8,8 +8,8 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public class MemberShipFun
     {
-        double[] HealthLevelMS;
-        double[] ValueDivision;
+        public double[] HealthLevelMS;
+        public double[] ValueDivision;
         public MemberShipFun()
         {
             HealthLevelMS = new double[4];

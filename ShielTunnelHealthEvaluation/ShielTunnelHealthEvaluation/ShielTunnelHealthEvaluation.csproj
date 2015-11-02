@@ -63,20 +63,34 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CORE\FuzzyAHP\Calculation.cs" />
     <Compile Include="CORE\FuzzyAHP\FuzzyOperator.cs" />
     <Compile Include="CORE\FuzzyAHP\HealthLevel.cs" />
     <Compile Include="CORE\FuzzyAHP\JudgementMatrix.cs" />
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
+    <Compile Include="UI\IndexTreeUserControl.xaml.cs">
+      <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\IndexTreeViewModel.cs" />
+    <Compile Include="UI\JudgementMatrixWnd.xaml.cs">
+      <DependentUpon>JudgementMatrixWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainWindowViewModel.cs" />
     <Compile Include="UI\TestWnd.xaml.cs">
       <DependentUpon>TestWnd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Weight.xaml.cs">
-      <DependentUpon>Weight.xaml</DependentUpon>
     </Compile>
     <Page Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\IndexTreeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\JudgementMatrixWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,7 +99,7 @@
     <Compile Include="CORE\EvaluationMethod.cs" />
     <Compile Include="CORE\FuzzyAHP\AHPIndexHierarchy.cs" />
     <Compile Include="CORE\FuzzyAHP\FuzzyAHP.cs" />
-    <Compile Include="CORE\FuzzyAHP\Hierarchy.cs" />
+    <Compile Include="CORE\FuzzyAHP\XMLIO.cs" />
     <Compile Include="Serialization.cs" />
     <Compile Include="UI\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -96,10 +110,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\TestWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Weight.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

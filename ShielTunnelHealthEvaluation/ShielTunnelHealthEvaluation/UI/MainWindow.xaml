@@ -1,12 +1,17 @@
 ﻿<Window x:Class="ShielTunnelHealthEvaluation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:indexHierarchy="clr-namespace:ShielTunnelHealthEvaluation.CORE.FuzzyAHP"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition> </ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <Button x:Name="btnSetting" Click="btnSetting_Click">基本设置</Button>
             <Button x:Name="btnWeight" Click="btnWeight_Click">确定权重</Button>
