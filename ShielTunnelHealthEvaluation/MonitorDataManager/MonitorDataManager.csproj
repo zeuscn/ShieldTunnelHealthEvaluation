@@ -38,8 +38,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorReport.cs" />
     <Compile Include="MonitorDataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\DbAdapter.cs" />
+    <Compile Include="Serialization\DbContext.cs" />
+    <Compile Include="Serialization\DbDataLoader.cs" />
+    <Compile Include="Serialization\DbDataLoader2.cs" />
+    <Compile Include="Serialization\DGObjectLoader.cs" />
+    <Compile Include="Serialization\DGObjectLoader2.cs" />
+    <Compile Include="Serialization\IS3XmlSerializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
