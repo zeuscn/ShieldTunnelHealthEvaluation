@@ -33,8 +33,8 @@ namespace ShielTunnelHealthEvaluation.UI
 
         private void btnTestWeigh_Click(object sender, RoutedEventArgs e)
         {
-            Weight testWei = new Weight();
-            testWei.Show();
+            //Weight testWei = new Weight();
+            //testWei.Show();
         }
     }
 }

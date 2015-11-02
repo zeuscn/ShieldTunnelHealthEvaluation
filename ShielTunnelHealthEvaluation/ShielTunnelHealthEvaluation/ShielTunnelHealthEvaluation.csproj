@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{07BB0663-A145-480C-91F6-086057F16AE8}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ShielTunnelHealthEvaluation</RootNamespace>
     <AssemblyName>ShielTunnelHealthEvaluation</AssemblyName>
@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\IS3-20151013%28完整版%29\IS3\IS3-Tools\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,9 +37,16 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ShielTunnelHealthEvaluation.App</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IS3.Core">
+      <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\bin\IS3.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IS3.Monitoring">
+      <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\IS3-Extensions\IS3-Monitoring\obj\Debug\IS3.Monitoring.dll</HintPath>
+    </Reference>
     <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\ThirdParty\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
@@ -68,6 +75,8 @@
     <Compile Include="CORE\FuzzyAHP\JudgementMatrix.cs" />
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
+    <Compile Include="DBManager\DBManager.cs" />
+    <Compile Include="TunnelHealthEvaluationTool.cs" />
     <Compile Include="UI\TestWnd.xaml.cs">
       <DependentUpon>TestWnd.xaml</DependentUpon>
     </Compile>
@@ -131,7 +140,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DBManager\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
