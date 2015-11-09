@@ -17,7 +17,7 @@ namespace ShielTunnelHealthEvaluation
         static void Main(string[] args)
         {
             Application app = new Application();
-            TestWnd win = new TestWnd();
+            MainWindow win = new MainWindow();
             app.Run(win);
         }
     }

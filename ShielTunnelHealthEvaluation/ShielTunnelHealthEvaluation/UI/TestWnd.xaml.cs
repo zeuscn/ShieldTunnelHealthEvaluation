@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace ShielTunnelHealthEvaluation.UI
 {
@@ -19,6 +20,7 @@ namespace ShielTunnelHealthEvaluation.UI
     /// </summary>
     public partial class TestWnd : Window
     {
+        
         public TestWnd()
         {
             InitializeComponent();
@@ -26,15 +28,16 @@ namespace ShielTunnelHealthEvaluation.UI
 
         private void btnSerialization_Click(object sender, RoutedEventArgs e)
         {
-            Hierarchy testHierarchy = new Hierarchy();
-            //testHierarchy.OutputXml();
-            testHierarchy.ReadXml();
+            //testHierarchy = new XMLIO();
+            //testHierarchy.OutputIndexHierarchyXml();
+            //testHierarchy.ReadXml();
         }
 
         private void btnTestWeigh_Click(object sender, RoutedEventArgs e)
         {
-            //Weight testWei = new Weight();
-            //testWei.Show();
+           // testHierarchy = new XMLIO();
+           // testHierarchy.ReadIndexHierarchyXml();
+           //DenseMatrix tempMatrix=new DenseMatrix(testHierarchy.TunnelHealIndex.ChildrenNames.Count);
         }
     }
 }

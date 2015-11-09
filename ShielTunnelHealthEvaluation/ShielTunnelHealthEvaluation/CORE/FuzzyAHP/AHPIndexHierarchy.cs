@@ -9,6 +9,7 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     [Serializable]
     public class AHPIndexHierarchy
     {
+        private List<string> _childNames;
         public string Name { get; set; }
         public AHPIndexValueType IndexType { get; set; }
         [XmlIgnore]
@@ -17,7 +18,21 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         [XmlIgnore]
         public double Value { get; set; }
         [XmlIgnore]
-        public List<string> ChildrenNames { get; set; }
+        public List<string> ChildrenNames
+        {
+            get
+            {
+                _childNames = new List<string>();
+                if(Children!=null&&Children.Count>0)
+                {
+                    foreach(AHPIndexHierarchy child in Children)
+                    {
+                        _childNames.Add(child.Name);
+                    }
+                }
+                return _childNames;
+            }
+        }
         [XmlIgnore]
         public AHPIndexHierarchy Parent { get; set; }
         public List<AHPIndexHierarchy> Children { get; set; }

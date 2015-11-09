@@ -1,10 +1,12 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
+using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,54 +14,46 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using unvell.ReoGrid;
-using mathNet = MathNet.Numerics;
 
 namespace ShielTunnelHealthEvaluation.UI
 {
     /// <summary>
-    /// Weight.xaml 的交互逻辑
+    /// JudgementMatrixUC.xaml 的交互逻辑
     /// </summary>
-    public partial class Weight : Window
+    public partial class JudgementMatrixWnd : Window
     {
-        DataTable dt;
+        JudgementMatrixInfos judgemetnMatrixInfos;
+        Dictionary<string, JudgementMatrixInfo> judgeMatrixDic;
+        int matrixNo;
+        int matrixTotalNo;
         List<string> sequences;
         DenseMatrix weighMatrix;
-        public Weight(List<string> sequences, DenseMatrix weighMatrix)
+        public JudgementMatrixWnd(AHPIndexHierarchy ahpIndexHierarchy)
+        {
+            judgemetnMatrixInfos = new JudgementMatrixInfos(ahpIndexHierarchy);
+            judgeMatrixDic = judgemetnMatrixInfos.JudgeMatrixDic;
+            InitializeComponent();
+            matrixNo = 0;
+            matrixTotalNo = judgeMatrixDic.Count;
+            JudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
+            RefreshData(judgemtInfo.IndexsSequence, judgemtInfo.JudgementMatrix);
+        }
+        public void RefreshData(List<string> sequences, DenseMatrix weighMatrix)
         {
             Debug.Assert(sequences != null && sequences.Count > 0);
             this.sequences = sequences;
-            if(weighMatrix!=null)
+            if (weighMatrix != null)
             {
                 this.weighMatrix = weighMatrix;
             }
             else
             {
-                weighMatrix = new DenseMatrix(sequences.Count);
+                this.weighMatrix = new DenseMatrix(sequences.Count);
             }
-            InitializeComponent();
-            //addCol();
-            //this.dgWeight.ItemsSource = dt.DefaultView;
-            List<string> test = new List<string>() { "a", "b" };
-            DenseMatrix dm = new DenseMatrix(2);
-            dm[0, 0] = 1;
-            dm[0, 1] = 2;
             initialData();
-        }
-        private void addCol()
-        {
-            //List<string> test = new List<string>() { "tests1", "test2" };
-            //DataGridTextColumn testcolumn = new DataGridTextColumn();
-            //testcolumn.hea
-            //this.dgWeight.Columns.Add();
-            dt = new DataTable();
-            dt.Columns.Add("Col1", System.Type.GetType("System.String"));
-            dt.Columns.Add("Col2", System.Type.GetType("System.String"));
-            DataRow row1 = dt.NewRow();
-            row1["Col1"] = "Rc1";
-            row1["Col2"] = "Rc2";
-            dt.Rows.Add(row1);
         }
         private void initialData()
         {
@@ -83,13 +77,25 @@ namespace ShielTunnelHealthEvaluation.UI
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            matrixNo++;
+            if(matrixNo>=matrixTotalNo)
+            {
+                this.Close();
+                return;
+            }
+            weighMatrix = new DenseMatrix(sequences.Count);
             Worksheet mySheet = this.reoWeigh.CurrentWorksheet;
             for (int i = 0; i < sequences.Count; i++)
             {
                 for (int j = 0; j < sequences.Count; j++)
                 {
-                    mySheet[i, j] = weighMatrix[i, j];
+                    weighMatrix[i, j] = double.Parse(mySheet[i, j].ToString());
                 }
+            }
+            if (matrixNo < matrixTotalNo)
+            {
+                JudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
+                RefreshData(judgemtInfo.IndexsSequence, judgemtInfo.JudgementMatrix);
             }
         }
     }
