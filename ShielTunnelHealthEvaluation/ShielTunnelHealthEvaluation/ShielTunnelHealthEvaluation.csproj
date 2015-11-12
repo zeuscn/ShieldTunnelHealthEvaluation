@@ -70,7 +70,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySerialization.cs" />
+    <Compile Include="CORE\FuzzyAHP\BinaryIO.cs" />
     <Compile Include="CORE\FuzzyAHP\Calculation.cs" />
+    <Compile Include="CORE\FuzzyAHP\ExtensionMethod.cs" />
     <Compile Include="CORE\FuzzyAHP\FuzzyOperator.cs" />
     <Compile Include="CORE\FuzzyAHP\HealthLevel.cs" />
     <Compile Include="CORE\FuzzyAHP\JudgementMatrix.cs" />
@@ -147,8 +150,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\Hierarchy.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

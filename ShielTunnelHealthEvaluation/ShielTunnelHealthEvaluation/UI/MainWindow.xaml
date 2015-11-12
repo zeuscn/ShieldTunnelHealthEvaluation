@@ -15,6 +15,8 @@
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <Button x:Name="btnSetting" Click="btnSetting_Click">基本设置</Button>
             <Button x:Name="btnWeight" Click="btnWeight_Click">确定权重</Button>
+            <Button x:Name="btnResult" Click="btnResult_Click">结果</Button>
+            <Button x:Name="btnTestt" Click="btnTestt_Click">测试datatable序列化</Button>
         </StackPanel>
     </Grid>
 </Window>

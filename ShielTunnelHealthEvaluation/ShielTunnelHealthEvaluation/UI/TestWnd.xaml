@@ -5,5 +5,8 @@
     <Grid>
         <Button x:Name="btnSerialization" Width="80" Margin="26,29.5,186,202.5" Click="btnSerialization_Click">测试序列化</Button>
         <Button x:Name="btnTestWeigh"  Width="80" Click="btnTestWeigh_Click" Margin="128,30,84,202">测试判断矩阵</Button>
+        <Button x:Name="btnTestDataTable" Width="80" Height="40" Click="btnTestDataTable_Click" Margin="26,87,186,143" > 测试datatable序列化</Button>
+        <Button x:Name="btnTestMatrix" Width="80" Height="40" Click="btnTestMatrix_Click" Margin="128,87,84,143">测试Matrix</Button>
+        <Button x:Name="btnTestMath" Width="80" Height="40" Click="btnTestMath_Click" Margin="26,146,186,84">测试Math</Button>
     </Grid>
 </Window>

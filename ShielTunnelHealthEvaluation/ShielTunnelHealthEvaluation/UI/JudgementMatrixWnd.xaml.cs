@@ -25,6 +25,7 @@ namespace ShielTunnelHealthEvaluation.UI
     /// </summary>
     public partial class JudgementMatrixWnd : Window
     {
+        JudgementMatrixInfosSet _judgementMatrixInfosSet;
         JudgementMatrixInfos judgemetnMatrixInfos;
         Dictionary<string, JudgementMatrixInfo> judgeMatrixDic;
         int matrixNo;
@@ -33,6 +34,7 @@ namespace ShielTunnelHealthEvaluation.UI
         DenseMatrix weighMatrix;
         public JudgementMatrixWnd(AHPIndexHierarchy ahpIndexHierarchy)
         {
+            _judgementMatrixInfosSet = new JudgementMatrixInfosSet();
             judgemetnMatrixInfos = new JudgementMatrixInfos(ahpIndexHierarchy);
             judgeMatrixDic = judgemetnMatrixInfos.JudgeMatrixDic;
             InitializeComponent();
@@ -77,9 +79,11 @@ namespace ShielTunnelHealthEvaluation.UI
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            matrixNo++;
+            
             if(matrixNo>=matrixTotalNo)
             {
+                _judgementMatrixInfosSet.JudgementMatrixInfosList.Add(judgemetnMatrixInfos);
+                BinaryIO.OutputMatrixInfosSet(_judgementMatrixInfosSet);
                 this.Close();
                 return;
             }
@@ -92,6 +96,9 @@ namespace ShielTunnelHealthEvaluation.UI
                     weighMatrix[i, j] = double.Parse(mySheet[i, j].ToString());
                 }
             }
+            judgeMatrixDic.ElementAt(matrixNo).Value.JudgementMatrix = weighMatrix;
+            judgeMatrixDic.ElementAt(matrixNo).Value.CalculateEigenVector();
+            matrixNo++;
             if (matrixNo < matrixTotalNo)
             {
                 JudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;

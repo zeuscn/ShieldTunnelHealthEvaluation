@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System.Xml.Serialization;
+using System.Data;
 
 namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
 {
@@ -35,16 +37,19 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
             }
             return result;
         }
-        private void CalculateEigenVector()
+        public void CalculateEigenVector()
         {
             var evd = JudgementMatrix.Evd();
             var eigenVectors = evd.EigenVectors;
             var eigenValues = evd.EigenValues;
-            int maxIndex = eigenValues.AbsoluteMaximumIndex();
-            maxEigenValue = eigenValues.AbsoluteMaximum().Real;
-            var weight = eigenVectors.Column(maxIndex);
-            weight = weight / (weight.Sum());
-            WeightVector = (DenseVector)weight;
+            DenseVector weight = new DenseVector(eigenValues.Count);
+            for (int i = 0; i < eigenValues.Count;i++ )
+            {
+                weight[i] = eigenValues[i].Real;
+            }
+                weight = weight / (weight.Sum());
+            WeightVector = weight;
+            maxEigenValue = WeightVector.AbsoluteMaximum();
         }
     }
     [Serializable]
@@ -52,6 +57,7 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     {
         public string ExpertName { get; set; }
         public DateTime Time { get; set; }
+       [XmlIgnore]
         public Dictionary<string,JudgementMatrixInfo> JudgeMatrixDic { get; set; }
         public JudgementMatrixInfos()
         {
@@ -61,7 +67,7 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
             JudgeMatrixDic = new Dictionary<string, JudgementMatrixInfo>();
             InitialData(ahpIndexHierarchy);
         }
-        public void InitialData(AHPIndexHierarchy ahpIndexHierarchy)
+        private void InitialData(AHPIndexHierarchy ahpIndexHierarchy)
         {
             if(ahpIndexHierarchy.Children==null||ahpIndexHierarchy.Children.Count<1)
             {
@@ -82,10 +88,10 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
     [Serializable]
     public class JudgementMatrixInfosSet
     {
-        public  List<JudgementMatrixInfos> JudgementMatrixInfoSet { get; set; }
+        public  List<JudgementMatrixInfos> JudgementMatrixInfosList { get; set; }
         public JudgementMatrixInfosSet()
         {
-            this.JudgementMatrixInfoSet = new List<JudgementMatrixInfos>();
+            this.JudgementMatrixInfosList = new List<JudgementMatrixInfos>();
         }
     }
 }

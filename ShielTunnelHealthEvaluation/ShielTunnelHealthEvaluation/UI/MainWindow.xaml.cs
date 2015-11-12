@@ -1,4 +1,5 @@
-﻿using ShielTunnelHealthEvaluation.UI;
+﻿using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
+using ShielTunnelHealthEvaluation.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,17 @@ namespace ShielTunnelHealthEvaluation
         {
             JudgementMatrixWnd weightWnd = new JudgementMatrixWnd(viewModel.MyAHPIndexHierarachys[0]);
             weightWnd.Show();
+        }
+
+        private void btnTestt_Click(object sender, RoutedEventArgs e)
+        {
+            TestWnd _testWnd = new TestWnd();
+            _testWnd.Show();
+        }
+
+        private void btnResult_Click(object sender, RoutedEventArgs e)
+        {
+            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarachys[0]);
         }
     }
 }

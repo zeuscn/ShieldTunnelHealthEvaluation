@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MathNet.Numerics.LinearAlgebra.Double;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -7,7 +9,10 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static class XMLIO
     {
-        
+        //string filePath=@"..\..\Resources\Hierarchy.xml";
+        const string _hierarchyFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\Hierarchy.xml";
+        //string filePath = @"..\..\Resources\MatrixInfos.xml";
+        const string _matrixFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.xml";
             //TunnelHealIndex = new AHPIndexHierarchy()
             //{
             //    Name = "TunnelHealth",
@@ -37,31 +42,50 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         public static void OutputIndexHierarchyXml(AHPIndexHierarchy TunnelHealIndex)
         {
             Serialization<AHPIndexHierarchy> AHPIndex2Xml = new Serialization<AHPIndexHierarchy>();
-            string filePath=@"..\..\Resources\Hierarchy.xml";
             //AHPIndex2Xml.XMLSerialization(filePath, TunnelHealIndex);
-            AHPIndex2Xml.XMLSerialization(filePath, TunnelHealIndex);
+            AHPIndex2Xml.XMLSerialization(_hierarchyFilePath, TunnelHealIndex);
         }
         public static   AHPIndexHierarchy ReadIndexHierarchyXml()
         {
             AHPIndexHierarchy TunnelHealIndex = new AHPIndexHierarchy();
             Serialization<AHPIndexHierarchy> Xml2AHPIndex = new Serialization<AHPIndexHierarchy>();
-            string filePath = @"..\..\Resources\Hierarchy.xml"; 
-            TunnelHealIndex = Xml2AHPIndex.XMLDeserialization(filePath);
+            //string filePath = @"..\..\Resources\Hierarchy.xml"; 
+            TunnelHealIndex = Xml2AHPIndex.XMLDeserialization(_hierarchyFilePath);
+            SetAhpParent(TunnelHealIndex);
             return TunnelHealIndex;
+        }
+        private static void SetAhpParent(AHPIndexHierarchy ahpIndexHierarchy)
+        {
+            if(ahpIndexHierarchy.Children!=null)
+            {
+                foreach(AHPIndexHierarchy ahpIndexChild in ahpIndexHierarchy.Children)
+                {
+                    ahpIndexChild.Parent = ahpIndexHierarchy;
+                    SetAhpParent(ahpIndexChild);
+                }
+            }
         }
         public static void OutputMatrixXml(JudgementMatrixInfos judgementMatrixInfos)
         {
             Serialization<JudgementMatrixInfos> Matrix2Xml = new Serialization<JudgementMatrixInfos>();
-            string filePath = @"..\..\Resources\MatrixInfos.xml";
-            Matrix2Xml.XMLSerialization(filePath, judgementMatrixInfos);
+            Matrix2Xml.XMLSerialization(_matrixFilePath, judgementMatrixInfos);
         }
         public static  JudgementMatrixInfos ReadMatriXml()
         {
             JudgementMatrixInfos judgementMatrixInfos = new JudgementMatrixInfos();
             Serialization<JudgementMatrixInfos> xml2Matrix = new Serialization<JudgementMatrixInfos>();
-            string filePath = @"..\..\Resources\MatrixInfos.xml";
-            judgementMatrixInfos = xml2Matrix.XMLDeserialization(filePath);
+            judgementMatrixInfos = xml2Matrix.XMLDeserialization(_matrixFilePath);
             return judgementMatrixInfos;
+        }
+        public static void OutputDatatable(DataTable dt)
+        {
+            Serialization<DataTable> dt2Xml = new Serialization<DataTable>();
+            dt2Xml.XMLSerialization(_matrixFilePath, dt);
+        }
+        public static void OutputTestMatrix(DenseMatrix ds)
+        {
+            Serialization<DenseMatrix> dt2Xml = new Serialization<DenseMatrix>();
+            dt2Xml.XMLSerialization(_matrixFilePath, ds);
         }
     }
 }
