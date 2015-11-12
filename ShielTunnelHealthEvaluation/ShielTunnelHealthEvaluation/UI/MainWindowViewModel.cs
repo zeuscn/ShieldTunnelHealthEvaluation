@@ -14,6 +14,7 @@ namespace ShielTunnelHealthEvaluation.UI
         {
             MyAHPIndexHierarachys = new List<AHPIndexHierarchy>();
             MyAHPIndexHierarachys.Add( XMLIO.ReadIndexHierarchyXml());
+            Calculation cal = new Calculation(MyAHPIndexHierarachys[0]);
         }
     }
 }

@@ -4,14 +4,20 @@
         xmlns:indexHierarchy="clr-namespace:ShielTunnelHealthEvaluation.CORE.FuzzyAHP"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        
+        <HierarchicalDataTemplate x:Key="hierarchyDT" ItemsSource="{Binding Children}">
+            <StackPanel>
+                <TextBlock x:Name="tbName" Text="{Binding Name}"></TextBlock>
+                <TextBlock x:Name="tbGrade" Text="{Binding Value}"></TextBlock>
+            </StackPanel>
+        </HierarchicalDataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition> </ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+        <TreeView x:Name="tvHierarchy" ItemsSource="{Binding MyAHPIndexHierarachys}" ItemTemplate="{StaticResource hierarchyDT}">
+        </TreeView>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <Button x:Name="btnSetting" Click="btnSetting_Click">基本设置</Button>
             <Button x:Name="btnWeight" Click="btnWeight_Click">确定权重</Button>

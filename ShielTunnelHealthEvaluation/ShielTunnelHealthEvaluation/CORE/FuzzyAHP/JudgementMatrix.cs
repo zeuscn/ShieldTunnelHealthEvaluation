@@ -5,6 +5,7 @@ using System.Text;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System.Xml.Serialization;
 using System.Data;
+using System.Windows;
 
 namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
 {
@@ -28,10 +29,25 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         public bool CheckConsistency()
         {
             bool result = false;
+            if(JudgementMatrix==null)
+            {
+                return result;
+            }
+            if (matrixDimension == 1 )
+            {
+                if(maxEigenValue==1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
             double CI = (maxEigenValue - matrixDimension) / (matrixDimension - 1);
             double RI = RIs[matrixDimension];
-            double CR = CI / RI;
-            if (CR < 0.1)
+           // double CR = CI / RI;
+            if (CI<= 0.1*RI)
             {
                 result = true;
             }
@@ -50,6 +66,10 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
                 weight = weight / (weight.Sum());
             WeightVector = weight;
             maxEigenValue = WeightVector.AbsoluteMaximum();
+            if(WeightVector==null)
+            {
+                MessageBox.Show("判断矩阵错误，无法计算权重！");
+            }
         }
     }
     [Serializable]

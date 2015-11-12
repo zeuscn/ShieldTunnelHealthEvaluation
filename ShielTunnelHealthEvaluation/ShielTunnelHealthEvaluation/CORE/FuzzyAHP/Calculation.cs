@@ -19,6 +19,11 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
             _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();
             _ahpIndexUtil=new AHPIndexHierarchyUtil(ahp);
             InitialBaseData();
+            if(!IsMatrixExist())
+            {
+                MessageBox.Show("需要定义判断矩阵！");
+                return;
+            }
             CalculateWeightVctor();
             CalculateFuzzyMatrix();
             ShowResult();
@@ -103,6 +108,36 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         {
             List<AHPIndexHierarchy> tunnelHealthIndex = _ahpIndexUtil.FindbyLevel(0);
             MessageBox.Show(tunnelHealthIndex[0].FuzzyValue.ToString());
+        }
+        private bool IsMatrixExist()
+        {
+            List<JudgementMatrixInfos> temp=new List<JudgementMatrixInfos>();
+            bool result = false;
+            List<int> toDeleteIndexs = new List<int>();
+            int _judgementMatrixCount = _judgementMatrixInfosSet.JudgementMatrixInfosList.Count;
+            for (int i=0;i<_judgementMatrixInfosSet.JudgementMatrixInfosList.Count;i++)
+            {
+                JudgementMatrixInfos _judgementMatrixInfos = _judgementMatrixInfosSet.JudgementMatrixInfosList[i];
+                Dictionary<string, JudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
+                bool isAllMatrixExist = true;
+                foreach (KeyValuePair<string, JudgementMatrixInfo> kvp in tempMatrixInfosDic)
+                {
+                    if(kvp.Value==null)
+                    {
+                        isAllMatrixExist = false;
+                    }
+                }
+                if(isAllMatrixExist)
+                {
+                    temp.Add(_judgementMatrixInfos);
+                }
+            }
+            _judgementMatrixInfosSet.JudgementMatrixInfosList = temp;
+            if(temp!=null&&temp.Count>0)
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }

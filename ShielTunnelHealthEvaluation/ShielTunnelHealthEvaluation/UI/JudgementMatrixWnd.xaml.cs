@@ -79,14 +79,6 @@ namespace ShielTunnelHealthEvaluation.UI
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            
-            if(matrixNo>=matrixTotalNo)
-            {
-                _judgementMatrixInfosSet.JudgementMatrixInfosList.Add(judgemetnMatrixInfos);
-                BinaryIO.OutputMatrixInfosSet(_judgementMatrixInfosSet);
-                this.Close();
-                return;
-            }
             weighMatrix = new DenseMatrix(sequences.Count);
             Worksheet mySheet = this.reoWeigh.CurrentWorksheet;
             for (int i = 0; i < sequences.Count; i++)
@@ -98,11 +90,26 @@ namespace ShielTunnelHealthEvaluation.UI
             }
             judgeMatrixDic.ElementAt(matrixNo).Value.JudgementMatrix = weighMatrix;
             judgeMatrixDic.ElementAt(matrixNo).Value.CalculateEigenVector();
+            if (!judgeMatrixDic.ElementAt(matrixNo).Value.CheckConsistency())
+            {
+                return ;
+            }
             matrixNo++;
             if (matrixNo < matrixTotalNo)
             {
                 JudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
                 RefreshData(judgemtInfo.IndexsSequence, judgemtInfo.JudgementMatrix);
+            }
+            if(matrixNo==matrixTotalNo-1)
+            {
+                this.btnOK.Content = "完成";
+            }
+            if (matrixNo == matrixTotalNo )
+            {
+                _judgementMatrixInfosSet.JudgementMatrixInfosList.Add(judgemetnMatrixInfos);
+                BinaryIO.OutputMatrixInfosSet(_judgementMatrixInfosSet);
+                this.Close();
+                return;
             }
         }
     }
