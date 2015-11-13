@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static class FuzzyOperator
     {

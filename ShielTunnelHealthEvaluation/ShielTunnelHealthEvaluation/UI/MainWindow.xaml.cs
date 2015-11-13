@@ -1,5 +1,5 @@
-﻿using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
-using ShielTunnelHealthEvaluation.UI;
+﻿using ShieldTunnelHealthEvaluation.CORE.FuzzyAHP;
+using ShieldTunnelHealthEvaluation.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ShielTunnelHealthEvaluation
+namespace ShieldTunnelHealthEvaluation
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

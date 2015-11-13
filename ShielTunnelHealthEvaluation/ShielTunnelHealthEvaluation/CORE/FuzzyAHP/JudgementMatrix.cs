@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using System.Data;
 using System.Windows;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     [Serializable]
     public class JudgementMatrixInfo
@@ -72,46 +72,6 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
             }
         }
     }
-    [Serializable]
-    public class JudgementMatrixInfos
-    {
-        public string ExpertName { get; set; }
-        public DateTime Time { get; set; }
-       [XmlIgnore]
-        public Dictionary<string,JudgementMatrixInfo> JudgeMatrixDic { get; set; }
-        public JudgementMatrixInfos()
-        {
-        }
-        public JudgementMatrixInfos(AHPIndexHierarchy ahpIndexHierarchy)
-        {
-            JudgeMatrixDic = new Dictionary<string, JudgementMatrixInfo>();
-            InitialData(ahpIndexHierarchy);
-        }
-        private void InitialData(AHPIndexHierarchy ahpIndexHierarchy)
-        {
-            if(ahpIndexHierarchy.Children==null||ahpIndexHierarchy.Children.Count<1)
-            {
-                return;
-            }
-            JudgementMatrixInfo judgeMatrixInfo = new JudgementMatrixInfo();
-            judgeMatrixInfo.IndexsSequence = ahpIndexHierarchy.ChildrenNames;
-            JudgeMatrixDic.Add(ahpIndexHierarchy.Name,judgeMatrixInfo);
-            if(ahpIndexHierarchy.Children!=null&&ahpIndexHierarchy.Children.Count>0)
-            {
-                foreach(AHPIndexHierarchy item in ahpIndexHierarchy.Children)
-                {
-                    InitialData(item);
-                }
-            }
-        }
-    }
-    [Serializable]
-    public class JudgementMatrixInfosSet
-    {
-        public  List<JudgementMatrixInfos> JudgementMatrixInfosList { get; set; }
-        public JudgementMatrixInfosSet()
-        {
-            this.JudgementMatrixInfosList = new List<JudgementMatrixInfos>();
-        }
-    }
+  
+
 }

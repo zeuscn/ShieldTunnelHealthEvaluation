@@ -10,11 +10,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
+using ShieldTunnelHealthEvaluation.CORE.FuzzyAHP;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System.Data;
 
-namespace ShielTunnelHealthEvaluation.UI
+namespace ShieldTunnelHealthEvaluation.UI
 {
     /// <summary>
     /// TestWnd.xaml 的交互逻辑

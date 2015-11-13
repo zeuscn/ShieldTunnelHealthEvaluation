@@ -4,9 +4,10 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using ShielTunnelHealthEvaluation.UI;
+using ShieldTunnelHealthEvaluation.UI;
+using System.Threading;
 
-namespace ShielTunnelHealthEvaluation
+namespace ShieldTunnelHealthEvaluation
 {
     /// <summary>
     /// App.xaml 的交互逻辑
@@ -17,6 +18,9 @@ namespace ShielTunnelHealthEvaluation
         static void Main(string[] args)
         {
             Application app = new Application();
+            //Thread t = new Thread(ThreadProc);
+            //t.SetApartmentState(ApartmentState.STA);
+            //t.Start();
             MainWindow win = new MainWindow();
             app.Run(win);
         }

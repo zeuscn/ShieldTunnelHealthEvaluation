@@ -1,4 +1,4 @@
-﻿<Window x:Class="ShielTunnelHealthEvaluation.UI.JudgementMatrixWnd"
+﻿<Window x:Class="ShieldTunnelHealthEvaluation.UI.JudgementMatrixWnd"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

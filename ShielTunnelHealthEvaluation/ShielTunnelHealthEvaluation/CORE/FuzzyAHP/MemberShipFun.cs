@@ -5,7 +5,7 @@ using System.Text;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public class MemberShipFun
     {

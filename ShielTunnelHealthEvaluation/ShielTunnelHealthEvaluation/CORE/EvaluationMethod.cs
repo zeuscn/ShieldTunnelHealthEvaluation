@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ShielTunnelHealthEvaluation.CORE
+namespace ShieldTunnelHealthEvaluation.CORE
 {
     enum EvaluationMethod
     {

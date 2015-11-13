@@ -1,5 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
-using ShielTunnelHealthEvaluation.CORE.FuzzyAHP;
+using ShieldTunnelHealthEvaluation.CORE.FuzzyAHP;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using unvell.ReoGrid;
 
-namespace ShielTunnelHealthEvaluation.UI
+namespace ShieldTunnelHealthEvaluation.UI
 {
     /// <summary>
     /// JudgementMatrixUC.xaml 的交互逻辑

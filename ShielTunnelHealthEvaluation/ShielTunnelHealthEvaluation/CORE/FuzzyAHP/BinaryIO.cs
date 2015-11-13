@@ -1,15 +1,16 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static class BinaryIO
     {
-        const string _matrixFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.data";
+        const string _matrixFilePath = @"E:\百度云同步盘\MyWorkGit\YRTTHE\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.data";
         public static void OutputMatrix(DenseMatrix ds)
         {
             BinarySerialization<DenseMatrix>.Serialization(_matrixFilePath, ds);
@@ -24,7 +25,14 @@ namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
         }
         public  static JudgementMatrixInfosSet ReadMatrixInfosSet()
         {
-            return BinarySerialization<JudgementMatrixInfosSet>.Deserialization(_matrixFilePath);
+            if(File.Exists(_matrixFilePath))
+            {
+                return BinarySerialization<JudgementMatrixInfosSet>.Deserialization(_matrixFilePath);
+            }
+            else
+            {
+                return new JudgementMatrixInfosSet();
+            }
         }
     }
 }

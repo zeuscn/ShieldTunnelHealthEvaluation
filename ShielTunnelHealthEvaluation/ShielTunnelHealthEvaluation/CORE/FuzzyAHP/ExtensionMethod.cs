@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static class ExtensionMethod
     {

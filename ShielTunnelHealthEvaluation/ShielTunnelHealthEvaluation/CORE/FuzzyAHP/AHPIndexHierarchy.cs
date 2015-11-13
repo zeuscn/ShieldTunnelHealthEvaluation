@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     [Serializable]
     public class AHPIndexHierarchy

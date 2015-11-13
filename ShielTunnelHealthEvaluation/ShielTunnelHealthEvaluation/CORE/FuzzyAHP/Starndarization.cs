@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using MathNet.Numerics;
 
-namespace ShielTunnelHealthEvaluation.CORE.FuzzyAHP
+namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static  class Starndarization
     {

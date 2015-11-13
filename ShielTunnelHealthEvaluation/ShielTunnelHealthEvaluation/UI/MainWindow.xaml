@@ -1,7 +1,7 @@
-﻿<Window x:Class="ShielTunnelHealthEvaluation.MainWindow"
+﻿<Window x:Class="ShieldTunnelHealthEvaluation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:indexHierarchy="clr-namespace:ShielTunnelHealthEvaluation.CORE.FuzzyAHP"
+        xmlns:indexHierarchy="clr-namespace:ShieldTunnelHealthEvaluation.CORE.FuzzyAHP"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <HierarchicalDataTemplate x:Key="hierarchyDT" ItemsSource="{Binding Children}">
