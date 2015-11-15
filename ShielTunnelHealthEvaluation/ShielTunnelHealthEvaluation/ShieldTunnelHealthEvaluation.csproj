@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySerialization.cs" />
+    <Compile Include="CORE\DataManage.cs" />
+    <Compile Include="CORE\DifferentDateIndexData.cs" />
     <Compile Include="CORE\FuzzyAHP\BinaryIO.cs" />
     <Compile Include="CORE\FuzzyAHP\Calculation.cs" />
     <Compile Include="CORE\FuzzyAHP\ExtensionMethod.cs" />
@@ -81,6 +83,10 @@
     <Compile Include="CORE\FuzzyAHP\JudgementMatrixInfosSet.cs" />
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
+    <Compile Include="CORE\FuzzyAHP\TunnelHealthIndex.cs" />
+    <Compile Include="DataBaseManager\DbConnection.cs" />
+    <Compile Include="DataBaseManager\IndexDataSummary.cs" />
+    <Compile Include="DataBaseManager\IndexTabelSummaryInfo.cs" />
     <Compile Include="HealthEvaluationTool.cs" />
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
