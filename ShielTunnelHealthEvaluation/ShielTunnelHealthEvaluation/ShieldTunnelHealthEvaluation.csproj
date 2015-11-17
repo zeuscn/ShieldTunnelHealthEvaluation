@@ -43,9 +43,11 @@
   <ItemGroup>
     <Reference Include="IS3.Core">
       <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\bin\IS3.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="IS3.Monitoring">
       <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\IS3-Extensions\IS3-Monitoring\obj\Debug\IS3.Monitoring.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\ThirdParty\MathNet.Numerics.dll</HintPath>

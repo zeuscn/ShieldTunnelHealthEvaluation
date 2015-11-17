@@ -17,7 +17,7 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         DbContext _dbcontext;
         string _indexTableName = "dbo_TunnelHealthEvaluation_IndexTableSummary";
         List<IndexTabelSummaryInfo> _indexTableSumInfos = new List<IndexTabelSummaryInfo>();
-        public List<IndexTabelSummaryInfo> IndexTableSumInfos { get{return _indexTableSumInfos;} set; }
+        public List<IndexTabelSummaryInfo> IndexTableSumInfos { get{return _indexTableSumInfos;} }
         string _openDbFail = "数据库中缺少表dbo_TunnelHealthEvaluation_IndexTableSummary";
         public IndexDataSummary()
         {
@@ -135,18 +135,18 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
                                 var _dataTables=_indexInfo.DataTableNames;
                                 double _maxValue=double.MinValue;
                                 double _minValue=double.MaxValue;
+                                string sql=string.Empty;
                                 foreach(var _aTable in _dataTables)//todo:选出每个时间下最不利值；
                                 {
-                                    string sql = string.Format("select max(value),min(value) from {0}", _aTable);
-                                    var _value=_dbcontext.ExecuteCommand(sql);
-                                    while(_value.Read())
-                                    {
-                                        _maxValue=_maxValue>(double)_value[0]?_maxValue:(double)_value[0];
-                                        _minValue = _minValue < (double)_value[1] ? _minValue : (double)_value[1];
-                                    }
-                                    
+                                     sql = string.Format("{0} select * from {1} union", _aTable);
                                 }
-                                
+                                //sql = string.Format("select time, max(value) as Max,min(value) as Min from {0} group by time",);
+                                var _value = _dbcontext.ExecuteCommand(sql);
+                                while (_value.Read())
+                                {
+                                    _maxValue = _maxValue > (double)_value[0] ? _maxValue : (double)_value[0];
+                                    _minValue = _minValue < (double)_value[1] ? _minValue : (double)_value[1];
+                                }
                                 break;
                             }
                     }
