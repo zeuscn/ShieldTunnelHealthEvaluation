@@ -11,12 +11,15 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         //public string monTarget;
         //public string indexName;
         //public List<IGrouping<string, DataRow>> MonitorDataTable;
+        private string timeField = "time";
+        private string valueField = "value";
+        private string timeFormat = "yyyy--MM--dd";
         public Dictionary<string, List<DataRow>> MonitorDataTable = new Dictionary<string, List<DataRow>>();
         public List<DataRow> SelectNewestDateBefore(List<DataRow> dataRows, DateTime targetTime)
         {
             var q = (from d in dataRows
-                     where d.Field<DateTime>("time") < targetTime
-                     group d by d.Field<DateTime>("time").ToString("yyyy--MM--dd") into g
+                     where d.Field<DateTime>(timeField) < targetTime
+                     group d by d.Field<DateTime>(timeField).ToShortDateString() into g
                      orderby g.Key descending
                      select g).ToList();
             var _newestData = q[0].ToList();
@@ -26,6 +29,23 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         {
             var maxRow = (double)datarows.Max(r => r.Field<decimal>("value"));
             return maxRow;
+        }
+        public List<DateTime> SelectIndexMonTime(List<DataRow> datarows)
+        {
+            var allTime=(from v in datarows
+                             group v by v.Field<DateTime>(timeField).ToShortDateString() into g
+                             orderby g.Key descending
+                             select Convert.ToDateTime(g.Key)).ToList();
+            return allTime;
+        }
+        public List<DateTime> AllTime()
+        {
+            List<DateTime> allTime = new List<DateTime>();
+            foreach(var v in MonitorDataTable.Values)
+            {
+                allTime.Union(SelectIndexMonTime(v));
+            }
+            return allTime.Distinct().ToList();
         }
     }
 }
