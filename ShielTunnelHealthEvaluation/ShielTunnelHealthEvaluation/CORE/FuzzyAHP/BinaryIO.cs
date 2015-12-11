@@ -10,7 +10,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public static class BinaryIO
     {
-        const string _matrixFilePath = @"E:\百度云同步盘\MyWorkGit\YRTTHE\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.data";
+        const string _matrixFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.data";
         public static void OutputMatrix(DenseMatrix ds)
         {
             BinarySerialization<DenseMatrix>.Serialization(_matrixFilePath, ds);

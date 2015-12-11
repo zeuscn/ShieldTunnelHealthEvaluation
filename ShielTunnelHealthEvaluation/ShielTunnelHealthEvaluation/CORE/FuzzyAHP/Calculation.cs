@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
+using ShieldTunnelHealthEvaluation.DataBaseManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,12 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         AHPIndexHierarchy _ahpIndexHierarchy;
         JudgementMatrixInfosSet _judgementMatrixInfosSet;
         AHPIndexHierarchyUtil _ahpIndexUtil;
-        public Calculation(AHPIndexHierarchy ahp)
+        public Calculation(AHPIndexHierarchy ahp, GroupedMonitorDataByTime groupedMonDataByTime)
         {
             _ahpIndexHierarchy = ahp;
             _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();
             _ahpIndexUtil=new AHPIndexHierarchyUtil(ahp);
-            InitialBaseData();
+            InitialBaseData(groupedMonDataByTime);
             if(!IsMatrixExist())
             {
                 MessageBox.Show("需要定义判断矩阵！");
@@ -34,12 +35,12 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             bool result = true;
             return result;
         }
-        private void InitialBaseData()
+        private void InitialBaseData(GroupedMonitorDataByTime groupedMonDataByTime)
         {
             List<AHPIndexHierarchy> baseAhpIndex = _ahpIndexUtil.FindbyLevel(AHPIndexHierarchyUtil.totalLevelCount - 1);
             foreach(AHPIndexHierarchy ahpIndex in baseAhpIndex)
             {
-                ahpIndex.Value = 90;
+                ahpIndex.Value = groupedMonDataByTime.SelectMaxValue(groupedMonDataByTime.MonitorDataTable[ahpIndex.Name]);//未考虑时间
             }
         }
         private void CalculateWeightVctor()

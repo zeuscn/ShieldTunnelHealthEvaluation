@@ -10,7 +10,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
     public static class XMLIO
     {
         //string filePath=@"..\..\Resources\Hierarchy.xml";
-        const string _hierarchyFilePath = @"E:\百度云同步盘\MyWorkGit\YRTTHE\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\Hierarchy.xml";
+        const string _hierarchyFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\Hierarchy.xml";
         //string filePath = @"..\..\Resources\MatrixInfos.xml";
         const string _matrixFilePath = @"E:\百度云同步盘\MyWorkGit\YRTTHE\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.xml";
             //TunnelHealIndex = new AHPIndexHierarchy()

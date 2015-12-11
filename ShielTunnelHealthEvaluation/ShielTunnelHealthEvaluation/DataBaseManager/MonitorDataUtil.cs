@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ShieldTunnelHealthEvaluation.DataBaseManager
 {
-    class MonitorDataUtil
+    public class MonitorDataUtil
     {
-        GroupedMonitorDataByTime groupedDatas = new GroupedMonitorDataByTime();
+        public GroupedMonitorDataByTime groupedDatas = new GroupedMonitorDataByTime();
         public MonitorDataUtil(Project proj)
         {
             //try
@@ -73,8 +73,8 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
                     continue;
                 }
             }
-            var test=groupedDatas.SelectNewestDateBefore(groupedDatas.MonitorDataTable.ElementAt(0).Value, DateTime.MaxValue);
-            groupedDatas.SelectMaxValue(test);
+            //var test=groupedDatas.SelectNewestDateBefore(groupedDatas.MonitorDataTable.ElementAt(0).Value, DateTime.MaxValue);
+            //groupedDatas.SelectMaxValue(test);
             //DGObjectsCollection _testGroup = _monitorDomain.getObjects("MonGroup");
             //List<DGObject> _testObjs = _testGroup.merge();
             //foreach (DGObject _testobj in _testObjs)

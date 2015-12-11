@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ShieldTunnelHealthEvaluation.DataBaseManager
 {
-    class GroupedMonitorDataByTime
+    public class GroupedMonitorDataByTime
     {
         //public string componentNames;
         //public string monTarget;
@@ -13,6 +14,7 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         //public List<IGrouping<string, DataRow>> MonitorDataTable;
         private string timeField = "time";
         private string valueField = "value";
+        private string readingField = "reading";
         private string timeFormat = "yyyy--MM--dd";
         public Dictionary<string, List<DataRow>> MonitorDataTable = new Dictionary<string, List<DataRow>>();
         public List<DataRow> SelectNewestDateBefore(List<DataRow> dataRows, DateTime targetTime)
@@ -27,21 +29,22 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         }
         public double SelectMaxValue(List<DataRow> datarows)
         {
-            var maxRow = (double)datarows.Max(r => r.Field<decimal>("value"));
-            return maxRow;
+            var maxRow = (double?)datarows.Max(r => r.Field<decimal?>(readingField));
+            Debug.Assert(maxRow != null);
+            return (double)maxRow;
         }
         public List<DateTime> SelectIndexMonTime(List<DataRow> datarows)
         {
-            var allTime=(from v in datarows
-                             group v by v.Field<DateTime>(timeField).ToShortDateString() into g
-                             orderby g.Key descending
-                             select Convert.ToDateTime(g.Key)).ToList();
+            var allTime = (from v in datarows
+                           group v by v.Field<DateTime>(timeField).ToShortDateString() into g
+                           orderby g.Key descending
+                           select Convert.ToDateTime(g.Key)).ToList();
             return allTime;
         }
         public List<DateTime> AllTime()
         {
             List<DateTime> allTime = new List<DateTime>();
-            foreach(var v in MonitorDataTable.Values)
+            foreach (var v in MonitorDataTable.Values)
             {
                 allTime.Union(SelectIndexMonTime(v));
             }

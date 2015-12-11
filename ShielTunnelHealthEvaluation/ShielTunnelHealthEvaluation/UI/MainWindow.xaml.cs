@@ -48,7 +48,7 @@ namespace ShieldTunnelHealthEvaluation
 
         private void btnResult_Click(object sender, RoutedEventArgs e)
         {
-            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarachys[0]);
+            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarachys[0], viewModel._monDataUtil.groupedDatas);
         }
     }
 }

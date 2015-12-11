@@ -19,6 +19,7 @@ namespace ShieldTunnelHealthEvaluation.UI
         IView _inputView;                   // the input view (boreholes, projeciton line)
         DGObjectsCollection _test;        // all the boreholes
         bool _initFailed;
+        public MonitorDataUtil _monDataUtil;
         public List<AHPIndexHierarchy> MyAHPIndexHierarachys { get; set; }
         public MainWindowViewModel()
         {
@@ -29,7 +30,7 @@ namespace ShieldTunnelHealthEvaluation.UI
             _prj = Globals.project;
 
             if (_mainFrame == null || _prj == null) { _initFailed = true; }
-            MonitorDataUtil _monDataUtil=new MonitorDataUtil(_prj);
+            _monDataUtil=new MonitorDataUtil(_prj);
 
 
             //MonitorDataUtil 
@@ -71,11 +72,11 @@ namespace ShieldTunnelHealthEvaluation.UI
             //        continue;
             //    }
             //}
-            //MyAHPIndexHierarachys = new List<AHPIndexHierarchy>();
-            //MyAHPIndexHierarachys.Add(XMLIO.ReadIndexHierarchyXml());
+            MyAHPIndexHierarachys = new List<AHPIndexHierarchy>();
+            MyAHPIndexHierarachys.Add(XMLIO.ReadIndexHierarchyXml());
 
-            //JudgementMatrixInfosSet testSet= BinaryIO.ReadMatrixInfosSet();
-            //Calculation cal = new Calculation(MyAHPIndexHierarachys[0]);
+            JudgementMatrixInfosSet testSet= BinaryIO.ReadMatrixInfosSet();
+            Calculation cal = new Calculation(MyAHPIndexHierarachys[0], _monDataUtil.groupedDatas);
             //}
             //catch(Exception e)
             //{
