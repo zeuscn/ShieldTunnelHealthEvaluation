@@ -19,19 +19,19 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         {
            return BinarySerialization<DenseMatrix>.Deserialization(_matrixFilePath);
         }
-        public static void OutputMatrixInfosSet(JudgementMatrixInfosSet _matrixInfosSet)
+        public static void OutputMatrixInfosSet(AllExpertJudgementMatrixs _matrixInfosSet)
         {
-            BinarySerialization<JudgementMatrixInfosSet>.Serialization(_matrixFilePath,_matrixInfosSet);
+            BinarySerialization<AllExpertJudgementMatrixs>.Serialization(_matrixFilePath,_matrixInfosSet);
         }
-        public  static JudgementMatrixInfosSet ReadMatrixInfosSet()
+        public  static AllExpertJudgementMatrixs ReadMatrixInfosSet()
         {
             if(File.Exists(_matrixFilePath))
             {
-                return BinarySerialization<JudgementMatrixInfosSet>.Deserialization(_matrixFilePath);
+                return BinarySerialization<AllExpertJudgementMatrixs>.Deserialization(_matrixFilePath);
             }
             else
             {
-                return new JudgementMatrixInfosSet();
+                return new AllExpertJudgementMatrixs();
             }
         }
     }

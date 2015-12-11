@@ -8,10 +8,6 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
 {
     public class GroupedMonitorDataByTime
     {
-        //public string componentNames;
-        //public string monTarget;
-        //public string indexName;
-        //public List<IGrouping<string, DataRow>> MonitorDataTable;
         private string timeField = "time";
         private string valueField = "value";
         private string readingField = "reading";
@@ -29,6 +25,10 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         }
         public double SelectMaxValue(List<DataRow> datarows)
         {
+            if(datarows.Count<1)
+            {
+                return 10000;
+            }
             var maxRow = (double?)datarows.Max(r => r.Field<decimal?>(readingField));
             Debug.Assert(maxRow != null);
             return (double)maxRow;

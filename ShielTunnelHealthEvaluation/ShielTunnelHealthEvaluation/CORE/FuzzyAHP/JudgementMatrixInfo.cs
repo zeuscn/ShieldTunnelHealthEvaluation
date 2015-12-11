@@ -9,12 +9,15 @@ using System.Windows;
 
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
+    /// <summary>
+    /// 单个判断矩阵
+    /// </summary>
     [Serializable]
     public class JudgementMatrixInfo
     {
-        public List<string> IndexsSequence { get; set; }
+        public List<string> IndexsSequence { get; set; }///判断矩阵对应的指标序列
         public DenseMatrix JudgementMatrix { get; set; }
-        private double[] RIs { get; set; }
+        private double[] RIs = new double[11] { 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51 };
         private double maxEigenValue;
         private int matrixDimension { get { return JudgementMatrix.ColumnCount; } }
         public DenseVector WeightVector
@@ -24,8 +27,11 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         }
         public JudgementMatrixInfo()
         {
-            RIs = new double[11] { 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51 };
         }
+        /// <summary>
+        /// 一致性检验
+        /// </summary>
+        /// <returns></returns>
         public bool CheckConsistency()
         {
             bool result = false;

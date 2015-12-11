@@ -9,15 +9,18 @@ using System.Windows;
 
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
+    /// <summary>
+    /// 赋值并计算
+    /// </summary>
     public class Calculation
     {
         AHPIndexHierarchy _ahpIndexHierarchy;
-        JudgementMatrixInfosSet _judgementMatrixInfosSet;
+        AllExpertJudgementMatrixs _judgementMatrixInfosSet;
         AHPIndexHierarchyUtil _ahpIndexUtil;
         public Calculation(AHPIndexHierarchy ahp, GroupedMonitorDataByTime groupedMonDataByTime)
         {
             _ahpIndexHierarchy = ahp;
-            _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();
+            _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();///读取判断矩阵
             _ahpIndexUtil=new AHPIndexHierarchyUtil(ahp);
             InitialBaseData(groupedMonDataByTime);
             if(!IsMatrixExist())
@@ -29,12 +32,19 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             CalculateFuzzyMatrix();
             ShowResult();
         }
-
+        /// <summary>
+        /// 指标体系与判断矩阵是否对应
+        /// </summary>
+        /// <returns></returns>
         private bool CheckHierarchyMatrixCorrespond() //todo
         {
             bool result = true;
             return result;
         }
+        /// <summary>
+        /// 对指标体系赋值
+        /// </summary>
+        /// <param name="groupedMonDataByTime"></param>
         private void InitialBaseData(GroupedMonitorDataByTime groupedMonDataByTime)
         {
             List<AHPIndexHierarchy> baseAhpIndex = _ahpIndexUtil.FindbyLevel(AHPIndexHierarchyUtil.totalLevelCount - 1);
@@ -43,10 +53,13 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
                 ahpIndex.Value = groupedMonDataByTime.SelectMaxValue(groupedMonDataByTime.MonitorDataTable[ahpIndex.Name]);//未考虑时间
             }
         }
+        /// <summary>
+        /// 根据不同专家的判断矩阵计算权重向量，并赋值
+        /// </summary>
         private void CalculateWeightVctor()
         {
             int _judgementMatrixCount = _judgementMatrixInfosSet.JudgementMatrixInfosList.Count; 
-           foreach(JudgementMatrixInfos _judgementMatrixInfos in _judgementMatrixInfosSet.JudgementMatrixInfosList)
+           foreach(JudgementMatrixsSetting _judgementMatrixInfos in _judgementMatrixInfosSet.JudgementMatrixInfosList)
            {
                Dictionary<string, JudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
                foreach( KeyValuePair <string,JudgementMatrixInfo> kvp in tempMatrixInfosDic)
@@ -74,6 +87,9 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
                 }
             }
         }
+        /// <summary>
+        /// 计算模糊矩阵
+        /// </summary>
         private void CalculateFuzzyMatrix()
         {
             MemberShipFun _memeberShipFun = new MemberShipFun();
@@ -105,20 +121,27 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
                 }
             }
         }
+        /// <summary>
+        /// 展示计算结果(用于测试）
+        /// </summary>
         public void ShowResult()
         {
             List<AHPIndexHierarchy> tunnelHealthIndex = _ahpIndexUtil.FindbyLevel(0);
             MessageBox.Show(tunnelHealthIndex[0].FuzzyValue.ToString());
         }
+        /// <summary>
+        /// 是否已经定义了判断矩阵
+        /// </summary>
+        /// <returns></returns>
         private bool IsMatrixExist()
         {
-            List<JudgementMatrixInfos> temp=new List<JudgementMatrixInfos>();
+            List<JudgementMatrixsSetting> temp=new List<JudgementMatrixsSetting>();
             bool result = false;
             List<int> toDeleteIndexs = new List<int>();
             int _judgementMatrixCount = _judgementMatrixInfosSet.JudgementMatrixInfosList.Count;
             for (int i=0;i<_judgementMatrixInfosSet.JudgementMatrixInfosList.Count;i++)
             {
-                JudgementMatrixInfos _judgementMatrixInfos = _judgementMatrixInfosSet.JudgementMatrixInfosList[i];
+                JudgementMatrixsSetting _judgementMatrixInfos = _judgementMatrixInfosSet.JudgementMatrixInfosList[i];
                 Dictionary<string, JudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
                 bool isAllMatrixExist = true;
                 foreach (KeyValuePair<string, JudgementMatrixInfo> kvp in tempMatrixInfosDic)

@@ -7,8 +7,8 @@
     <ProjectGuid>{07BB0663-A145-480C-91F6-086057F16AE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShieldTunnelHealthEvaluation</RootNamespace>
-    <AssemblyName>ShieldTunnelHealthEvaluation</AssemblyName>
+    <RootNamespace>ShielTunnelHealthEvaluation</RootNamespace>
+    <AssemblyName>ShielTunnelHealthEvaluation</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\李老师\我的工作\IS3-20151013%28完整版%29\IS3\bin\tools\</OutputPath>
+    <OutputPath>..\..\..\..\IS3-20151013%28完整版%29\IS3\bin\tools\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,7 +30,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>D:\李老师\我的工作\IS3-20151013%28完整版%29\IS3\bin\tools\</OutputPath>
+    <OutputPath>..\..\..\..\IS3-20151013%28完整版%29\IS3\bin\tools\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,13 +41,11 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IS3.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\李老师\我的工作\IS3-20151013(完整版)\IS3\bin\IS3.Core.dll</HintPath>
+    <Reference Include="IS3.Core">
+      <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\bin\IS3.Core.dll</HintPath>
     </Reference>
-    <Reference Include="IS3.Monitoring, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\李老师\我的工作\IS3-20151013(完整版)\IS3\IS3-Extensions\IS3-Monitoring\obj\Debug\IS3.Monitoring.dll</HintPath>
+    <Reference Include="IS3.Monitoring">
+      <HintPath>..\..\..\..\IS3-20151013(完整版)\IS3\IS3-Extensions\IS3-Monitoring\obj\Debug\IS3.Monitoring.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\ThirdParty\MathNet.Numerics.dll</HintPath>
@@ -72,25 +70,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinarySerialization.cs" />
-    <Compile Include="CORE\DataManage.cs" />
-    <Compile Include="CORE\DifferentDateIndexData.cs" />
-    <Compile Include="CORE\FuzzyAHP\BinaryIO.cs" />
     <Compile Include="CORE\FuzzyAHP\Calculation.cs" />
-    <Compile Include="CORE\FuzzyAHP\ExtensionMethod.cs" />
     <Compile Include="CORE\FuzzyAHP\FuzzyOperator.cs" />
     <Compile Include="CORE\FuzzyAHP\HealthLevel.cs" />
-    <Compile Include="CORE\FuzzyAHP\JudgementMatrixInfo.cs" />
-    <Compile Include="CORE\FuzzyAHP\JudgementMatrixsSetting.cs" />
-    <Compile Include="CORE\FuzzyAHP\AllExpertJudgementMatrixs.cs" />
+    <Compile Include="CORE\FuzzyAHP\JudgementMatrix.cs" />
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
-    <Compile Include="CORE\FuzzyAHP\TunnelHealthIndex.cs" />
-    <Compile Include="DataBaseManager\DbConnection.cs" />
-    <Compile Include="DataBaseManager\GroupedMonitorDataByTime.cs" />
-    <Compile Include="DataBaseManager\MonitorDataUtil.cs" />
-    <Compile Include="HealthEvaluationTool.cs" />
-    <Compile Include="IndexMonPUtil.cs" />
+<<<<<<< HEAD
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
     </Compile>
@@ -99,6 +85,10 @@
       <DependentUpon>JudgementMatrixWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MainWindowViewModel.cs" />
+=======
+    <Compile Include="DBManager\DBManager.cs" />
+    <Compile Include="TunnelHealthEvaluationTool.cs" />
+>>>>>>> 93ec987be3c9ccf81e1a935bc7f98704746e7820
     <Compile Include="UI\TestWnd.xaml.cs">
       <DependentUpon>TestWnd.xaml</DependentUpon>
     </Compile>
@@ -161,13 +151,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Resources\MatrixInfos.data" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Hierarchy.xml">
-      <SubType>Designer</SubType>
-    </Resource>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

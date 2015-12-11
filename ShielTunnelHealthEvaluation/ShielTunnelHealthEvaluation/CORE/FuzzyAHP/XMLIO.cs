@@ -65,15 +65,15 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
                 }
             }
         }
-        public static void OutputMatrixXml(JudgementMatrixInfos judgementMatrixInfos)
+        public static void OutputMatrixXml(JudgementMatrixsSetting judgementMatrixInfos)
         {
-            Serialization<JudgementMatrixInfos> Matrix2Xml = new Serialization<JudgementMatrixInfos>();
+            Serialization<JudgementMatrixsSetting> Matrix2Xml = new Serialization<JudgementMatrixsSetting>();
             Matrix2Xml.XMLSerialization(_matrixFilePath, judgementMatrixInfos);
         }
-        public static  JudgementMatrixInfos ReadMatriXml()
+        public static  JudgementMatrixsSetting ReadMatriXml()
         {
-            JudgementMatrixInfos judgementMatrixInfos = new JudgementMatrixInfos();
-            Serialization<JudgementMatrixInfos> xml2Matrix = new Serialization<JudgementMatrixInfos>();
+            JudgementMatrixsSetting judgementMatrixInfos = new JudgementMatrixsSetting();
+            Serialization<JudgementMatrixsSetting> xml2Matrix = new Serialization<JudgementMatrixsSetting>();
             judgementMatrixInfos = xml2Matrix.XMLDeserialization(_matrixFilePath);
             return judgementMatrixInfos;
         }

@@ -16,7 +16,7 @@
             <ColumnDefinition> </ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TreeView x:Name="tvHierarchy" ItemsSource="{Binding MyAHPIndexHierarachys}" ItemTemplate="{StaticResource hierarchyDT}">
+        <TreeView x:Name="tvHierarchy" ItemsSource="{Binding MyAHPIndexHierarchys}" ItemTemplate="{StaticResource hierarchyDT}">
         </TreeView>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <Button x:Name="btnSetting" Click="btnSetting_Click">基本设置</Button>

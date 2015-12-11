@@ -18,9 +18,6 @@ namespace ShieldTunnelHealthEvaluation
         static void Main(string[] args)
         {
             Application app = new Application();
-            //Thread t = new Thread(ThreadProc);
-            //t.SetApartmentState(ApartmentState.STA);
-            //t.Start();
             MainWindow win = new MainWindow();
             app.Run(win);
         }

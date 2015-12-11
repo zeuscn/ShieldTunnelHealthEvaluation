@@ -25,8 +25,8 @@ namespace ShieldTunnelHealthEvaluation.UI
     /// </summary>
     public partial class JudgementMatrixWnd : Window
     {
-        JudgementMatrixInfosSet _judgementMatrixInfosSet;
-        JudgementMatrixInfos judgemetnMatrixInfos;
+        AllExpertJudgementMatrixs _judgementMatrixInfosSet;
+        JudgementMatrixsSetting judgemetnMatrixInfos;
         Dictionary<string, JudgementMatrixInfo> judgeMatrixDic;
         int matrixNo;
         int matrixTotalNo;
@@ -34,8 +34,8 @@ namespace ShieldTunnelHealthEvaluation.UI
         DenseMatrix weighMatrix;
         public JudgementMatrixWnd(AHPIndexHierarchy ahpIndexHierarchy)
         {
-            _judgementMatrixInfosSet = new JudgementMatrixInfosSet();
-            judgemetnMatrixInfos = new JudgementMatrixInfos(ahpIndexHierarchy);
+            _judgementMatrixInfosSet = new AllExpertJudgementMatrixs();
+            judgemetnMatrixInfos = new JudgementMatrixsSetting(ahpIndexHierarchy);
             judgeMatrixDic = judgemetnMatrixInfos.JudgeMatrixDic;
             InitializeComponent();
             matrixNo = 0;

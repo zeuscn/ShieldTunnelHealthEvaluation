@@ -8,16 +8,16 @@ using System.Xml.Serialization;
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     [Serializable]
-    public class JudgementMatrixInfos
+    public class JudgementMatrixsSetting
     {
         public string ExpertName { get; set; }
         public DateTime Time { get; set; }
         [XmlIgnore]
         public Dictionary<string, JudgementMatrixInfo> JudgeMatrixDic { get; set; }
-        public JudgementMatrixInfos()
+        public JudgementMatrixsSetting()
         {
         }
-        public JudgementMatrixInfos(AHPIndexHierarchy ahpIndexHierarchy)
+        public JudgementMatrixsSetting(AHPIndexHierarchy ahpIndexHierarchy)
         {
             JudgeMatrixDic = new Dictionary<string, JudgementMatrixInfo>();
             InitialData(ahpIndexHierarchy);

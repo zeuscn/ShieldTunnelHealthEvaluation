@@ -36,7 +36,7 @@ namespace ShieldTunnelHealthEvaluation
 
         private void btnWeight_Click(object sender, RoutedEventArgs e)
         {
-            JudgementMatrixWnd weightWnd = new JudgementMatrixWnd(viewModel.MyAHPIndexHierarachys[0]);
+            JudgementMatrixWnd weightWnd = new JudgementMatrixWnd(viewModel.MyAHPIndexHierarchys[0]);
             weightWnd.Show();
         }
 
@@ -48,7 +48,7 @@ namespace ShieldTunnelHealthEvaluation
 
         private void btnResult_Click(object sender, RoutedEventArgs e)
         {
-            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarachys[0], viewModel._monDataUtil.groupedDatas);
+            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarchys[0], viewModel._monDataUtil.groupedDatas);
         }
     }
 }

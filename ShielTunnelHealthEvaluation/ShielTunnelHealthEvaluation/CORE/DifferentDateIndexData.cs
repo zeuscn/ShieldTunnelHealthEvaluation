@@ -13,7 +13,6 @@ namespace ShieldTunnelHealthEvaluation.CORE
     {
         public DateTime UpdateDate { get; set; }
         public Dictionary<int,double> IndexValue { get; set; }
-        //public MonitorItemType GroupOrPoint;
     }
     enum MonitorItemType
     {
