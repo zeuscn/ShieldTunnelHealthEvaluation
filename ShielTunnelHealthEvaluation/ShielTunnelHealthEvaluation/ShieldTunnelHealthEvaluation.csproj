@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySerialization.cs" />
+    <Compile Include="CORE\Criteria.cs" />
     <Compile Include="CORE\DataManage.cs" />
     <Compile Include="CORE\DifferentDateIndexData.cs" />
     <Compile Include="CORE\FuzzyAHP\BinaryIO.cs" />

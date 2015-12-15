@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System.Diagnostics;
 
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public class MemberShipFun
     {
-        public double[] ValueDivision;
+        public double[] ValueDivision = new double[] { 0, 0, 6.25, 18.75, 31.25, 43.75, 56.25, 68.75, 81.25, 93.75, 100, 100 };
         public static readonly int HealthLevelCount = 5;
         public MemberShipFun()
         {
-            ValueDivision = new double[] {0,0,6.25,18.75,31.25,43.75,56.25,68.75,81.25,93.75,100,100};
         }
         private void TriMembership()
         {
