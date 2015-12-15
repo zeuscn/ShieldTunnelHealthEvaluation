@@ -8,29 +8,37 @@ using System.Threading.Tasks;
 
 namespace ShieldTunnelHealthEvaluation.CORE
 {
-     static class Criteria
+     public class Criteria
     {
-         private const Dictionary<string, double[]> FiveLevelCriteria = new Dictionary<string, double[]>
+         private readonly Dictionary<string, double[]> FiveLevelCriteria;
+         private readonly double[] GradeCriteria;
+         private readonly DenseVector GradeVector;
+         public Criteria()
          {
-             {"Settlement",new double[10]{0,1,2,3,4,5,6,7,8,9}},
-             {"Convergence",new double[10]{0,1,2,3,4,5,6,7,8,9}},
-             {"SoilPressure",new double[10]{0,1,2,3,4,5,6,7,8,9}},
-             {"ConcreteStress",new double[10]{0,1,2,3,4,5,6,7,8,9}},
-             {"SteelStress",new double[10]{0,1,2,3,4,5,6,7,8,9}},
-             {"SteelCorrosion",new double[10]{0,1,2,3,4,5,6,7,8,9}}
+             FiveLevelCriteria = new Dictionary<string, double[]>//todo:如何确定临界值
+         {
+             {"Settlement",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"Convergence",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"SoilPressure",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"ConcreteStress",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"SteelStress",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"SteelCorrosion",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}}
          };
-         private  const double[] GradeCriteria = new double[] {100,87.5,75,62.5,50,37.5,25,12.5,0,0 };
-         public static DenseVector CalculateFuzzyVector(string index,double originValue)
+             GradeCriteria = new double[] { 100, 87.5, 75, 62.5, 50, 37.5, 25, 12.5, 0, 0 };
+             GradeVector = new DenseVector(new double[5]{100, 75, 50, 25, 0 }) ;
+         }
+         public  DenseVector CalculateFuzzyVector(string index,double originValue)
          {
              MemberShipFun membershipFun = new MemberShipFun();
              membershipFun.ValueDivision = FiveLevelCriteria[index];
              var gradeFuzzyVector= membershipFun.TrapezoiMebership(originValue);
              return gradeFuzzyVector;
          }
-         public static double CalculateStandardGrade(string index,double originValue)
+         public  double CalculateStandardGrade(string index,double originValue)
          {
-             var indexCriteria = FiveLevelCriteria[index];
-
+             //var indexCriteria = FiveLevelCriteria[index];
+             var fuzzyVector = CalculateFuzzyVector(index, originValue);
+             return fuzzyVector.DotProduct(GradeVector);//todo:计算方法错误，怎么得到百分制？如何标准化？
          }
     }
 }

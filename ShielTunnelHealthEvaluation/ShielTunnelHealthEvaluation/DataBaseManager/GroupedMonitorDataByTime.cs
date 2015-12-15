@@ -20,12 +20,16 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
                      group d by d.Field<DateTime>(timeField).ToShortDateString() into g
                      orderby g.Key descending
                      select g).ToList();
+            if(q==null||q.Count<1)
+            {
+                return null;
+            }
             var _newestData = q[0].ToList();
             return _newestData;
         }
         public double SelectMaxValue(List<DataRow> datarows)
         {
-            if(datarows.Count<1)
+            if(datarows==null||datarows.Count<1)
             {
                 return 10000;
             }
@@ -46,7 +50,8 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
             List<DateTime> allTime = new List<DateTime>();
             foreach (var v in MonitorDataTable.Values)
             {
-                allTime.Union(SelectIndexMonTime(v));
+                var tempDtList = SelectIndexMonTime(v);
+                allTime=allTime.Union(tempDtList).ToList();
             }
             return allTime.Distinct().ToList();
         }

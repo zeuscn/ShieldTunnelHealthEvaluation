@@ -1,10 +1,12 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+
 
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
@@ -12,13 +14,18 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
     /// 指标的数据结构
     /// </summary>
     [Serializable]
-    public class AHPIndexHierarchy
+    public class AHPIndexHierarchy : INotifyPropertyChanged 
     {
         #region private property
         private List<string> _childNames;
         private List<AHPIndexHierarchy> _children = new List<AHPIndexHierarchy>();
+        private double indexValue;
         #endregion
-        public string Name { get; set; }
+        public string Name
+        {
+            get;
+            set;
+        }
         public AHPIndexValueType IndexType { get; set; }
         [XmlIgnore]
         public object OriginValue { get; set; } ///标准化前的值
@@ -26,7 +33,10 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         [XmlIgnore]
         public double Weight { get; set; }///权重
         [XmlIgnore]
-        public double Value { get; set; }///值
+        public double IndexValue {
+            get { return indexValue; }
+            set { if (indexValue != value) { this.indexValue = value; notifyPropertyChanged("IndexValue"); } } 
+        }///值
         [XmlIgnore]
         public int level { get; set; }///所在层
         [XmlIgnore]
@@ -54,6 +64,15 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         [XmlIgnore]
         public AHPIndexHierarchy Parent { get; set; }///父节点
         public List<AHPIndexHierarchy> Children { get { return _children; } set { _children = value; } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void notifyPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged!=null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     /// <summary>
     /// 将指标体系转为list结构，计算各指标的层次，并提供根据name，层数的检索功能

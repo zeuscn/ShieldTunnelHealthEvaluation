@@ -17,12 +17,12 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         AHPIndexHierarchy _ahpIndexHierarchy;
         AllExpertJudgementMatrixs _judgementMatrixInfosSet;
         AHPIndexHierarchyUtil _ahpIndexUtil;
-        public Calculation(AHPIndexHierarchy ahp, GroupedMonitorDataByTime groupedMonDataByTime)
+        public Calculation(AHPIndexHierarchy ahp, GroupedMonitorDataByTime groupedMonDataByTime,DateTime evaluationDate)
         {
             _ahpIndexHierarchy = ahp;
             _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();///读取判断矩阵
             _ahpIndexUtil=new AHPIndexHierarchyUtil(ahp);
-            InitialBaseData(groupedMonDataByTime);
+            InitialBaseData(groupedMonDataByTime, evaluationDate);
             if(!IsMatrixExist())
             {
                 MessageBox.Show("需要定义判断矩阵！");
@@ -45,12 +45,15 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         /// 对指标体系赋值
         /// </summary>
         /// <param name="groupedMonDataByTime"></param>
-        private void InitialBaseData(GroupedMonitorDataByTime groupedMonDataByTime)
+        private void InitialBaseData(GroupedMonitorDataByTime groupedMonDataByTime,DateTime evaluationDate)
         {
             List<AHPIndexHierarchy> baseAhpIndex = _ahpIndexUtil.FindbyLevel(AHPIndexHierarchyUtil.totalLevelCount - 1);
             foreach(AHPIndexHierarchy ahpIndex in baseAhpIndex)
             {
-                ahpIndex.Value = groupedMonDataByTime.SelectMaxValue(groupedMonDataByTime.MonitorDataTable[ahpIndex.Name]);//未考虑时间
+                var newestDataBefore= groupedMonDataByTime.SelectNewestDateBefore(groupedMonDataByTime.MonitorDataTable[ahpIndex.Name], evaluationDate);
+                ahpIndex.OriginValue = groupedMonDataByTime.SelectMaxValue(newestDataBefore); 
+                Criteria criteria = new Criteria();
+                ahpIndex.IndexValue = criteria.CalculateStandardGrade(ahpIndex.Name, (double)ahpIndex.OriginValue);
             }
         }
         /// <summary>
@@ -107,16 +110,16 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
                         AHPIndexHierarchy _ahpIndex = _ahpIndexUtil.FindbyName(name);
                         if(i==AHPIndexHierarchyUtil.totalLevelCount-2)//是底层
                         {
-                            _ahpIndex.FuzzyValue = _memeberShipFun.TrapezoiMebership(_ahpIndex.Value);
+                            _ahpIndex.FuzzyValue = _memeberShipFun.TrapezoiMebership(_ahpIndex.IndexValue);
                         }
 
                         _iLevelMatrix = (DenseMatrix) _iLevelMatrix.InsertRow(j, _ahpIndex.FuzzyValue);
                         _iLevelMatrix = (DenseMatrix)_iLevelMatrix.RemoveRow(j + 1);
                         //_ahpIndex.ChildrenFuzzyMatrix = (DenseMatrix)_iLevelMatrix;
-                        _childrenValue[j] = _ahpIndex.Value;
+                        _childrenValue[j] = _ahpIndex.IndexValue;
                     }
                     _iLevelAhpIndex.ChildrenFuzzyMatrix = _iLevelMatrix;
-                    _iLevelAhpIndex.Value = _iLevelAhpIndex.ChildrenWeightVector * _childrenValue;
+                    _iLevelAhpIndex.IndexValue = _iLevelAhpIndex.ChildrenWeightVector * _childrenValue;
                     _iLevelAhpIndex.FuzzyValue = FuzzyOperator.WeightedAverage(_iLevelAhpIndex.ChildrenWeightVector, _iLevelAhpIndex.ChildrenFuzzyMatrix);
                 }
             }

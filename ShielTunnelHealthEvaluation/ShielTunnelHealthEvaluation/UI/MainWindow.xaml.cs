@@ -48,7 +48,8 @@ namespace ShieldTunnelHealthEvaluation
 
         private void btnResult_Click(object sender, RoutedEventArgs e)
         {
-            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarchys[0], viewModel._monDataUtil.groupedDatas);
+            DateTime evaluationDate = (DateTime)lbDates.SelectedItem;
+            Calculation cal = new Calculation(viewModel.MyAHPIndexHierarchys[0], viewModel._monDataUtil.groupedDatas, evaluationDate);
         }
     }
 }

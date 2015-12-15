@@ -92,6 +92,7 @@
     <Compile Include="DataBaseManager\MonitorDataUtil.cs" />
     <Compile Include="HealthEvaluationTool.cs" />
     <Compile Include="IndexMonPUtil.cs" />
+    <Compile Include="Reliability\Reliability.cs" />
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
     </Compile>
@@ -164,7 +165,9 @@
     <AppDesigner Include="Properties\" />
     <None Include="Resources\MatrixInfos.data" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CORE\ANP\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Hierarchy.xml">
       <SubType>Designer</SubType>
