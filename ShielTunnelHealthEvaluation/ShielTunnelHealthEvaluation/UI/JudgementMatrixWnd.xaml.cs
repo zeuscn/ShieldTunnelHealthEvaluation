@@ -90,7 +90,7 @@ namespace ShieldTunnelHealthEvaluation.UI
             }
             judgeMatrixDic.ElementAt(matrixNo).Value.JudgementMatrix = weighMatrix;
             judgeMatrixDic.ElementAt(matrixNo).Value.CalculateEigenVector();
-            if (!judgeMatrixDic.ElementAt(matrixNo).Value.CheckConsistency())
+            if (!judgeMatrixDic.ElementAt(matrixNo).Value.CheckConsistency() || !judgeMatrixDic.ElementAt(matrixNo).Value.IsJudgementMatrix())
             {
                 return ;
             }

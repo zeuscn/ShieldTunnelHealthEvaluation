@@ -59,6 +59,20 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             }
             return result;
         }
+        public bool IsJudgementMatrix()
+        {
+            for(int row=0;row<JudgementMatrix.RowCount;row++)
+            {
+                for(int col=row;col<JudgementMatrix.ColumnCount;col++)
+                {
+                    if(JudgementMatrix[row,col]*JudgementMatrix[col,row]!=1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         public void CalculateEigenVector()
         {
             var evd = JudgementMatrix.Evd();

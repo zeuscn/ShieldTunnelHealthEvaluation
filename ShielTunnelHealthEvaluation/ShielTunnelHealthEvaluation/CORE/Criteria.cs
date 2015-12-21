@@ -18,7 +18,7 @@ namespace ShieldTunnelHealthEvaluation.CORE
              FiveLevelCriteria = new Dictionary<string, double[]>//todo:如何确定临界值
          {
              {"Settlement",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
-             {"Convergence",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
+             {"Convergence",new double[12]{double.MinValue,2,4,6,8,10,12,14,16,18,20,double.MaxValue}},
              {"SoilPressure",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
              {"ConcreteStress",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
              {"SteelStress",new double[12]{double.MinValue,1,2,3,4,5,6,7,8,9,10,double.MaxValue}},
