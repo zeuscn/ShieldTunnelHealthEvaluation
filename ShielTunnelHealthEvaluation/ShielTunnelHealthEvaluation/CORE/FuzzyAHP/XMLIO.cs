@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
@@ -10,9 +12,10 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
     public static class XMLIO
     {
         //string filePath=@"..\..\Resources\Hierarchy.xml";
-        const string _hierarchyFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\Hierarchy.xml";
+        //string _hierarchyFilePath = @"H:\MyResearch\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\Hierarchy.xml";
         //string filePath = @"..\..\Resources\MatrixInfos.xml";
         const string _matrixFilePath = @"E:\百度云同步盘\MyWorkGit\YRTTHE\ShielTunnelHealthEvaluation\ShielTunnelHealthEvaluation\Resources\MatrixInfos.xml";
+        public readonly static string _hierarchyFilePath = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString() + @"\Hierarchy.xml";
             //TunnelHealIndex = new AHPIndexHierarchy()
             //{
             //    Name = "TunnelHealth",
@@ -42,14 +45,12 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         public static void OutputIndexHierarchyXml(AHPIndexHierarchy TunnelHealIndex)
         {
             Serialization<AHPIndexHierarchy> AHPIndex2Xml = new Serialization<AHPIndexHierarchy>();
-            //AHPIndex2Xml.XMLSerialization(filePath, TunnelHealIndex);
             AHPIndex2Xml.XMLSerialization(_hierarchyFilePath, TunnelHealIndex);
         }
         public static   AHPIndexHierarchy ReadIndexHierarchyXml()
         {
             AHPIndexHierarchy TunnelHealIndex = new AHPIndexHierarchy();
             Serialization<AHPIndexHierarchy> Xml2AHPIndex = new Serialization<AHPIndexHierarchy>();
-            //string filePath = @"..\..\Resources\Hierarchy.xml"; 
             TunnelHealIndex = Xml2AHPIndex.XMLDeserialization(_hierarchyFilePath);
             SetAhpParent(TunnelHealIndex);
             return TunnelHealIndex;
@@ -68,6 +69,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         public static void OutputMatrixXml(JudgementMatrixsSetting judgementMatrixInfos)
         {
             Serialization<JudgementMatrixsSetting> Matrix2Xml = new Serialization<JudgementMatrixsSetting>();
+           // string _matrixFilePath = Directory.GetCurrentDirectory().ToString() + @"tools\Hierarchy.xml";
             Matrix2Xml.XMLSerialization(_matrixFilePath, judgementMatrixInfos);
         }
         public static  JudgementMatrixsSetting ReadMatriXml()
