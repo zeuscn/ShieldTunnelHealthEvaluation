@@ -87,9 +87,11 @@
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
     <Compile Include="CORE\FuzzyAHP\TunnelHealthIndex.cs" />
+    <Compile Include="CORE\SingleIndexCriteria.cs" />
     <Compile Include="DataBaseManager\DbConnection.cs" />
     <Compile Include="DataBaseManager\GroupedMonitorDataByTime.cs" />
     <Compile Include="DataBaseManager\MonitorDataUtil.cs" />
+    <Compile Include="DataBaseManager\TableCriteriaUtil.cs" />
     <Compile Include="HealthEvaluationTool.cs" />
     <Compile Include="IndexMonPUtil.cs" />
     <Compile Include="Reliability\Reliability.cs" />
@@ -173,7 +175,15 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\TunnelHealthEvaluation.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)Resources\TunnelHealthEvaluation.mdb $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

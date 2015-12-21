@@ -19,6 +19,7 @@ namespace ShieldTunnelHealthEvaluation
         {
             Application app = new Application();
             MainWindow win = new MainWindow();
+            //TestWnd win = new TestWnd();
             app.Run(win);
         }
     }

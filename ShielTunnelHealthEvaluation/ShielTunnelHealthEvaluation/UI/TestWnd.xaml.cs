@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using ShieldTunnelHealthEvaluation.CORE.FuzzyAHP;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System.Data;
+using ShieldTunnelHealthEvaluation.DataBaseManager;
 
 namespace ShieldTunnelHealthEvaluation.UI
 {
@@ -72,6 +73,11 @@ namespace ShieldTunnelHealthEvaluation.UI
             var var5= var3.RemoveColumn(1);
             DenseMatrix var4 =(DenseMatrix) var3;
             var result = dv * ds;
+        }
+
+        private void btnTestDbConn_Click(object sender, RoutedEventArgs e)
+        {
+            DbConnection dbconn = new DbConnection();
         }
     }
 }

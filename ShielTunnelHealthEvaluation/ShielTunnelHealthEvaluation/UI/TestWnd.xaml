@@ -8,5 +8,6 @@
         <Button x:Name="btnTestDataTable" Width="80" Height="40" Click="btnTestDataTable_Click" Margin="26,87,186,143" > 测试datatable序列化</Button>
         <Button x:Name="btnTestMatrix" Width="80" Height="40" Click="btnTestMatrix_Click" Margin="128,87,84,143">测试Matrix</Button>
         <Button x:Name="btnTestMath" Width="80" Height="40" Click="btnTestMath_Click" Margin="26,146,186,84">测试Math</Button>
+        <Button x:Name="btnTestDbConn"  Content="测试数据库连接" HorizontalAlignment="Left" Margin="133,146,0,0" VerticalAlignment="Top" Width="75" Height="40" Click="btnTestDbConn_Click"/>
     </Grid>
 </Window>
