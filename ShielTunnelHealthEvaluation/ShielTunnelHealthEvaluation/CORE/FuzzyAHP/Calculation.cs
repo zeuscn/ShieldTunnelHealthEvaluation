@@ -52,8 +52,8 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             {
                 var newestDataBefore= groupedMonDataByTime.SelectNewestDateBefore(groupedMonDataByTime.MonitorDataTable[ahpIndex.Name], evaluationDate);
                 ahpIndex.OriginValue = groupedMonDataByTime.SelectMaxValue(newestDataBefore); 
-                Criteria criteria = new Criteria();
-                ahpIndex.IndexValue = criteria.CalculateStandardGrade(ahpIndex.Name, (double)ahpIndex.OriginValue);
+                IndexStandarization criteria = new IndexStandarization();
+                ahpIndex.IndexValue = criteria.CalculateStandardGrade(ahpIndex.Name, IndexOptimizationType.Negative, (double)ahpIndex.OriginValue);
             }
         }
         /// <summary>

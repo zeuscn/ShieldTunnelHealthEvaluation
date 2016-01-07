@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySerialization.cs" />
-    <Compile Include="CORE\Criteria.cs" />
+    <Compile Include="CORE\IndexStandarization.cs" />
     <Compile Include="CORE\DataManage.cs" />
     <Compile Include="CORE\DifferentDateIndexData.cs" />
     <Compile Include="CORE\FuzzyAHP\BinaryIO.cs" />
@@ -95,6 +95,10 @@
     <Compile Include="HealthEvaluationTool.cs" />
     <Compile Include="IndexMonPUtil.cs" />
     <Compile Include="Reliability\Reliability.cs" />
+    <Compile Include="UI\CriteriaSettingViewModel.cs" />
+    <Compile Include="UI\CriteriaSettingWnd.xaml.cs">
+      <DependentUpon>CriteriaSettingWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
     </Compile>
@@ -109,6 +113,10 @@
     <Page Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\CriteriaSettingWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\IndexTreeUserControl.xaml">
       <SubType>Designer</SubType>

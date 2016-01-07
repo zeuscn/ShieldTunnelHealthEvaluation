@@ -25,11 +25,52 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         }
         public List<SingleIndexCriteria> Read(string projectName)
         {
-            
+            if (!IsProjectExist(projectName))
+            {
+                var AllIndexCriterias=Read("test");//use the default criterias
+                Insert(AllIndexCriterias, projectName);//update the project criteria with default criterias
+                return AllIndexCriterias;
+            }
             string sql = string.Format("select * from {0} where {1}=\"{2}\"", tableName,fieldProjectName,projectName);
             var reader= dbConn.ExcuteReader(sql);
             var criterias = Reader2Criterias(reader);
             return criterias;
+        }
+        public List<SingleIndexCriteria> Read()
+        {
+            string projectName="test";//todo
+            string sql = string.Format("select * from {0} where {1}=\"{2}\"", tableName, fieldProjectName, projectName);
+            var reader = dbConn.ExcuteReader(sql);
+            var criterias = Reader2Criterias(reader);
+            return criterias;
+        }
+        public void Update(List<SingleIndexCriteria> criterias,string projectName)
+        {
+            foreach(var singleCriteria in criterias)
+            {
+                string criteriaValues=singleCriteria.ToCriteriaValueString();
+                string updateSql = string.Format("update {0} set {1}=\"{2}\" where {3}=\"{4}\" and {5}=\"{6}\"", tableName, fieldCriterias,criteriaValues , fieldProjectName, projectName, fieldIndexName, singleCriteria.IndexName);
+                dbConn.ExcuteNonQuery(updateSql);
+            }
+        }
+        public void Insert(List<SingleIndexCriteria> criterias, string projectName)
+        {
+            foreach (var singleCriteria in criterias)
+            {
+                string criteriaValues = singleCriteria.ToCriteriaValueString();
+                string insertSql = string.Format("insert into {0} ( {1},{2},{3},{4},{5}) values (\"{6}\",\"{7}\",{8},\"{9}\",{10})", tableName, fieldProjectName, fieldIndexName,fieldLevelType,fieldCriterias,fieldIsAbsolute,projectName,singleCriteria.IndexName,singleCriteria.LevelType,criteriaValues,singleCriteria.IsAbsolute);
+                dbConn.ExcuteNonQuery(insertSql);
+            }
+        }
+        public bool IsProjectExist(string projectName)
+        {
+            string sql = string.Format("select * from {0} where {1}=\"{2}\"", tableName, fieldProjectName, projectName);
+            var reader=dbConn.ExcuteReader(sql);
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            return false;
         }
         private DenseVector ConvertCriterias2Vector(string criterias)
         {
@@ -46,6 +87,26 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
                 return cirteriaVector;
             }
             catch(Exception e)
+            {
+                return null;
+            }
+        }
+        private List<CriteriaDividing> ConvertCriterias2DivideValue(string criterias)
+        {
+            try
+            {
+                var criteriaDividings = new List<CriteriaDividing>();
+                var criteriaValues = criterias.Split(',');
+                //var criteriaDoubles = new double[criteriaValues.Length];
+                for (int i = 0; i < criteriaValues.Length; i++)
+                {
+                    var singleCriteriaDouble = double.Parse(criteriaValues[i]);
+                    //criteriaDoubles[i] = singleCriteriaDouble;
+                    criteriaDividings.Add(new CriteriaDividing() { DividingValue = singleCriteriaDouble });
+                }
+                return criteriaDividings;
+            }
+            catch (Exception e)
             {
                 return null;
             }
@@ -78,7 +139,7 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
                             singleCriteria.LevelType = int.Parse(reader[fieldCounter].ToString());
                             break;
                         case fieldCriterias:
-                            singleCriteria.CriteriaValues = ConvertCriterias2Vector(reader[fieldCounter].ToString());
+                            singleCriteria.CriteriaValues = ConvertCriterias2DivideValue(reader[fieldCounter].ToString());
                             break;
                         case fieldIsAbsolute:
                             singleCriteria.IsAbsolute = bool.Parse(reader[fieldCounter].ToString());

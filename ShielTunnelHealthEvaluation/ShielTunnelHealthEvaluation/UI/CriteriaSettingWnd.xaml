@@ -1,0 +1,55 @@
+﻿<Window x:Class="ShieldTunnelHealthEvaluation.UI.CriteriaSettingWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:ShieldTunnelHealthEvaluation.CORE"
+        Title="CriteriaSettingWnd" Height="300" Width="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="dtCriteriaDividing"  DataType="core.CriteriaDividing">
+                <StackPanel>
+                    <TextBlock Text="{Binding DividingValue}"></TextBlock>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView x:Name="lvCriterias" ItemsSource="{Binding AllIndexCriterias}" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="指标" DisplayMemberBinding="{Binding IndexName}"></GridViewColumn>
+                        <GridViewColumn Header="是否为绝对" DisplayMemberBinding="{Binding IsAbsolute}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="分级标准">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding CriteriaValues}">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="core.CriteriaDividing">
+                                                <StackPanel Width="40" Margin="2,0,2,0">
+                                                    <TextBox Text="{Binding DividingValue}"></TextBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Height="20">
+            <Button x:Name="btnSave"  HorizontalAlignment="Right" Height="20" Width="30" Click="btnSave_Click">Save</Button>
+        </StackPanel>
+    </Grid>
+</Window>

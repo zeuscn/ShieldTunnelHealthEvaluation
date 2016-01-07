@@ -28,6 +28,8 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         }
         public AHPIndexValueType IndexType { get; set; }
         [XmlIgnore]
+        public IndexOptimizationType IndexOptimType { get; set; }
+        [XmlIgnore]
         public object OriginValue { get; set; } ///标准化前的值
         public IndexStardrizationType StdType { get; set; }///标准化类型
         [XmlIgnore]
@@ -170,5 +172,12 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         Pessimistic = 1,
         Normal = 2,
         Optimistic = 3
+    }
+    public enum IndexOptimizationType
+    {
+        Undefined=0,
+        Positive=1,
+        Middle=2,
+        Negative=3
     }
 }

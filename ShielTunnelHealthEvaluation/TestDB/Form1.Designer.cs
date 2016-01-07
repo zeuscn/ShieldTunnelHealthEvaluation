@@ -30,6 +30,7 @@
         {
             this.btnTestConnection = new System.Windows.Forms.Button();
             this.btnTestCriteriaRead = new System.Windows.Forms.Button();
+            this.btnCriterias = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestConnection
@@ -52,11 +53,22 @@
             this.btnTestCriteriaRead.UseVisualStyleBackColor = true;
             this.btnTestCriteriaRead.Click += new System.EventHandler(this.btnTestCriteriaRead_Click);
             // 
+            // btnCriterias
+            // 
+            this.btnCriterias.Location = new System.Drawing.Point(216, 11);
+            this.btnCriterias.Name = "btnCriterias";
+            this.btnCriterias.Size = new System.Drawing.Size(75, 23);
+            this.btnCriterias.TabIndex = 2;
+            this.btnCriterias.Text = "测试分级标准";
+            this.btnCriterias.UseVisualStyleBackColor = true;
+            this.btnCriterias.Click += new System.EventHandler(this.btnCriterias_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(380, 254);
+            this.Controls.Add(this.btnCriterias);
             this.Controls.Add(this.btnTestCriteriaRead);
             this.Controls.Add(this.btnTestConnection);
             this.Name = "Form1";
@@ -69,6 +81,7 @@
 
         private System.Windows.Forms.Button btnTestConnection;
         private System.Windows.Forms.Button btnTestCriteriaRead;
+        private System.Windows.Forms.Button btnCriterias;
     }
 }
 
