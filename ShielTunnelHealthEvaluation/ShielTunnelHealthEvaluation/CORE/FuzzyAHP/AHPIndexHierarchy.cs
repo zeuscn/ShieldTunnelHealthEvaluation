@@ -32,6 +32,20 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         [XmlIgnore]
         public object OriginValue { get; set; } ///标准化前的值
         public IndexStardrizationType StdType { get; set; }///标准化类型
+        public string Grade
+        {
+            get
+            {
+                if(FuzzyValue==null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return EvaluatedGradeInfo.Memebership2Grade(FuzzyValue);
+                }
+            }
+        }
         [XmlIgnore]
         public double Weight { get; set; }///权重
         [XmlIgnore]

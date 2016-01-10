@@ -24,6 +24,7 @@
             <Button x:Name="btnCriterias" Click="btnCriterias_Click">分级标准</Button>
             <Button x:Name="btnResult" Click="btnResult_Click">结果</Button>
             <Button x:Name="btnTestt" Click="btnTestt_Click">测试datatable序列化</Button>
+            <Button x:Name="btnTestTreeDiagram" Click="btnTestTreeDiagram_Click">测试树图</Button>
             <ListBox x:Name="lbDates" ItemsSource="{Binding AllDataUpdateDate}" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectedIndex="0"></ListBox>
         </StackPanel>
     </Grid>

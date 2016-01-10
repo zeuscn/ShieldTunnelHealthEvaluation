@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShieldTunnelHealthEvaluation.TestGoWPF;
+using Northwoods.GoXam.Model;
 
 namespace ShieldTunnelHealthEvaluation
 {
@@ -21,10 +23,10 @@ namespace ShieldTunnelHealthEvaluation
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowViewModel viewModel;
+        public MainWindowViewModel viewModel;
         public MainWindow()
         {
-            viewModel = new MainWindowViewModel();
+             viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
             InitializeComponent();
         }
@@ -56,6 +58,19 @@ namespace ShieldTunnelHealthEvaluation
         {
             CriteriaSettingWnd criteriaSettingWnd = new CriteriaSettingWnd();
             criteriaSettingWnd.Show();
+        }
+
+        private void btnTestTreeDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            AHPIndexHierarchyUtil ahpHierarchyUtil = new AHPIndexHierarchyUtil(this.viewModel.MyAHPIndexHierarchys[0]);
+            var model = new TreeModel<AHPIndexHierarchy, string>();
+            model.ChildNodesPath = "ChildrenNames";
+            model.NodeKeyPath = "Name";
+            model.ParentNodePath = "ParentName";
+            model.NodesSource = ahpHierarchyUtil.ahpIndexList;
+            TestGoWPFWnd.model = model;
+            TestGoWPFWnd testGoWpfWnd = new TestGoWPFWnd();
+            testGoWpfWnd.Show();
         }
     }
 }

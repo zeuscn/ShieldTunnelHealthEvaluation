@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShieldTunnelHealthEvaluatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDB", "TestDB\TestDB.csproj", "{30F9E3AB-0C47-4948-ABCC-434C7D433479}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{D553E6E3-3773-4A58-89D2-BD91A23B193C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{30F9E3AB-0C47-4948-ABCC-434C7D433479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30F9E3AB-0C47-4948-ABCC-434C7D433479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30F9E3AB-0C47-4948-ABCC-434C7D433479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D553E6E3-3773-4A58-89D2-BD91A23B193C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D553E6E3-3773-4A58-89D2-BD91A23B193C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D553E6E3-3773-4A58-89D2-BD91A23B193C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D553E6E3-3773-4A58-89D2-BD91A23B193C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
