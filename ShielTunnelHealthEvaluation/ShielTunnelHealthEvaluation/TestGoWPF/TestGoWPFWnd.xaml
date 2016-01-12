@@ -2,13 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:go="http://schemas.nwoods.com/GoXam"
+        xmlns:testGoWpf="clr-namespace:ShieldTunnelHealthEvaluation.TestGoWPF"
         Title="TestGoWPF" Height="300" Width="300">
     <Window.Resources>
         <go:BooleanBrushConverter x:Key="theBooleanBrushConverter"
                               FalseBrush="White" TrueBrush="Red" />
-
+        <testGoWpf:GradeColorConverter x:Key="gradeColorConverter"></testGoWpf:GradeColorConverter>
         <DataTemplate x:Key="NodeTemplate">
-            <Border BorderThickness="1" BorderBrush="Black"
+            <Border BorderThickness="3" BorderBrush="{Binding Path=Data.Grade,Converter={StaticResource gradeColorConverter}}"
               Padding="2,0,2,0" CornerRadius="3"
               Background="{Binding Path=Part.IsDropOntoAccepted,
                                    Converter={StaticResource theBooleanBrushConverter}}"
@@ -19,7 +20,7 @@
                      go:Part.TextEditable="True" MinWidth="10" MinHeight="15" />
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Title: " />
-                        <TextBlock Text="{Binding Path=Data.Title, Mode=TwoWay}"
+                        <TextBlock Text="{Binding Path=Data.Grade}"
                        go:Part.TextEditable="True" MinWidth="10" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">

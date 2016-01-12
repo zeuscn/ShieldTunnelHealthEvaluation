@@ -54,10 +54,14 @@ namespace ShieldTunnelHealthEvaluation.CORE
              
             double xmax=criteriaValues[criteriaValues.Count-1].DividingValue;//todo:需要细化
             double xmin=criteriaValues[0].DividingValue;
-             if(optimType==null)
+            if (optimType == IndexOptimizationType.Undefined)
              {
                  MessageBox.Show("optimType is null!");
              }
+            if (indexValue==double.MaxValue)//todo:
+            {
+                return 100;
+            }
              if(optimType==IndexOptimizationType.Negative)
              {
                  if (indexValue > xmax)

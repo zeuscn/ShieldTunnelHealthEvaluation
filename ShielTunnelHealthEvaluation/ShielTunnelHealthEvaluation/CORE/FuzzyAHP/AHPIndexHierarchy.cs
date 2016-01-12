@@ -32,17 +32,20 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         [XmlIgnore]
         public object OriginValue { get; set; } ///标准化前的值
         public IndexStardrizationType StdType { get; set; }///标准化类型
+        [XmlIgnore]
         public string Grade
         {
             get
             {
                 if(FuzzyValue==null)
                 {
-                    return string.Empty;
+                    string grade = EvaluatedGradeInfo.Indexvalue2Grade(IndexValue).Clone().ToString();
+                    return grade;
                 }
                 else
                 {
-                    return EvaluatedGradeInfo.Memebership2Grade(FuzzyValue);
+                    string grade = EvaluatedGradeInfo.Memebership2Grade(FuzzyValue).Clone().ToString();
+                    return grade;
                 }
             }
         }

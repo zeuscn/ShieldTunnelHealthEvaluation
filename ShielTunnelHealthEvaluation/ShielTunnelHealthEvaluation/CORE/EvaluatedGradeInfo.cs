@@ -9,7 +9,8 @@ namespace ShieldTunnelHealthEvaluation.CORE
 {
     public static class EvaluatedGradeInfo
     {
-        private static readonly List<string> EvaluatedFiveGrades = new List<string>{"好", "较好", "较差", "差", "危险"};
+        public static readonly List<string> EvaluatedFiveGrades = new List<string>{"好", "较好", "较差", "差", "危险"};
+        private static readonly List<double> IndexGradeCriteria = new List<double> { 81.25, 56.25, 31.25, 6.25 ,0};
         public static string Memebership2Grade(DenseVector memebershipVector)
         {
             int maxIndex=memebershipVector.MaximumIndex();
@@ -21,7 +22,14 @@ namespace ShieldTunnelHealthEvaluation.CORE
         }
         public static string Indexvalue2Grade(double indexValue)
         {
-
+            for(int i=0;i<IndexGradeCriteria.Count;i++)
+            {
+                if(indexValue>=IndexGradeCriteria[i])
+                {
+                    return EvaluatedFiveGrades[i];
+                }
+            }
+            return EvaluatedFiveGrades[EvaluatedFiveGrades.Count - 1];
         }
     }
 }

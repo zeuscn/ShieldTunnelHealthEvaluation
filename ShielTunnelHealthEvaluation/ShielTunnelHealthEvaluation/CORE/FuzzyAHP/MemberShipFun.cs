@@ -10,7 +10,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
 {
     public class MemberShipFun
     {
-        public double[] ValueDivision = new double[] { 0, 0, 6.25, 18.75, 31.25, 43.75, 56.25, 68.75, 81.25, 93.75, 100, 100 };
+        public double[] ValueDivision = new double[] { 100, 100, 93.75,81.25,68.75,56.25,43.75,31.25,18.75,6.25,0,0 };
         public static readonly int HealthLevelCount = 5;
         public MemberShipFun()
         {
@@ -28,7 +28,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             }
             return HealthLevelMS;
         }
-        private double TrapezoiMebershipFun(double x,double a,double b,double c,double d)
+        private double TrapezoiMebershipFun(double x,double d,double c,double b,double a)
         {
             double result;
          

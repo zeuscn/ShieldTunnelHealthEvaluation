@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Northwoods.GoXam.Model;
 using ShieldTunnelHealthEvaluation.CORE.FuzzyAHP;
+using ShieldTunnelHealthEvaluation.CORE;
 
 namespace ShieldTunnelHealthEvaluation.TestGoWPF
 {
@@ -27,6 +28,27 @@ namespace ShieldTunnelHealthEvaluation.TestGoWPF
             // create the initial model
             InitializeComponent();
             myDiagram.Model = model;
+        }
+    }
+    public class GradeColorConverter:IValueConverter
+    {
+        List<Brush> colors = new List<Brush>()
+        {
+            Brushes.White,
+            Brushes.Blue,
+            Brushes.Yellow,
+            Brushes.Orange,
+            Brushes.Red
+        };
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            int index = EvaluatedGradeInfo.EvaluatedFiveGrades.FindIndex(grade=>grade==value.ToString());
+            return colors[index];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

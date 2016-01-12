@@ -31,7 +31,7 @@ namespace ShieldTunnelHealthEvaluation.DataBaseManager
         {
             if(datarows==null||datarows.Count<1)
             {
-                return 10000;
+                return double.MaxValue;//todo: more meaningful value
             }
             var maxRow = (double?)datarows.Max(r => r.Field<decimal?>(readingField));
             Debug.Assert(maxRow != null);

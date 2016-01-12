@@ -5,6 +5,6 @@
     <StartProgram>D:\李老师\我的工作\IS3-20151013%28完整版%29\IS3\bin\IS3.Desktop.exe</StartProgram>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
 </Project>
