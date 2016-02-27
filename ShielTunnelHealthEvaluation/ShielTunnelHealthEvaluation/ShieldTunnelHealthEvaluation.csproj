@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySerialization.cs" />
+    <Compile Include="CORE\DenseMatrixExtensiveMethod.cs" />
     <Compile Include="CORE\EvaluatedGradeInfo.cs" />
     <Compile Include="CORE\IndexStandarization.cs" />
     <Compile Include="CORE\DataManage.cs" />
@@ -112,6 +113,7 @@
       <DependentUpon>CriteriaSettingWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\FormsCharting.cs" />
+    <Compile Include="UI\GradeColorConverter.cs" />
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
     </Compile>
@@ -140,8 +142,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\JudgementMatrixWnd.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

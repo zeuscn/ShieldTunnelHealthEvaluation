@@ -29,6 +29,15 @@ namespace ShieldTunnelHealthEvaluation
              viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
             InitializeComponent();
+            
+
+            AHPIndexHierarchyUtil ahpHierarchyUtil = new AHPIndexHierarchyUtil(this.viewModel.MyAHPIndexHierarchys[0]);
+            var model = new TreeModel<AHPIndexHierarchy, string>();
+            model.ChildNodesPath = "ChildrenNames";
+            model.NodeKeyPath = "Name";
+            model.ParentNodePath = "ParentName";
+            model.NodesSource = ahpHierarchyUtil.ahpIndexList;
+            myDiagram.Model = model;
         }
 
         private void btnSetting_Click(object sender, RoutedEventArgs e)
@@ -71,6 +80,11 @@ namespace ShieldTunnelHealthEvaluation
             TestGoWPFWnd.model = model;
             TestGoWPFWnd testGoWpfWnd = new TestGoWPFWnd();
             testGoWpfWnd.Show();
+        }
+
+        private void btnCalculateHealthState_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
