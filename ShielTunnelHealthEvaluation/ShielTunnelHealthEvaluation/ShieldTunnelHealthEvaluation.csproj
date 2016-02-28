@@ -91,8 +91,8 @@
     <Compile Include="CORE\FuzzyAHP\ExtensionMethod.cs" />
     <Compile Include="CORE\FuzzyAHP\FuzzyOperator.cs" />
     <Compile Include="CORE\FuzzyAHP\HealthLevel.cs" />
-    <Compile Include="CORE\FuzzyAHP\JudgementMatrixInfo.cs" />
-    <Compile Include="CORE\FuzzyAHP\JudgementMatrixsSetting.cs" />
+    <Compile Include="CORE\FuzzyAHP\SingleBasicJudgementMatrixInfo.cs" />
+    <Compile Include="CORE\FuzzyAHP\JudgementMatrixsGroup.cs" />
     <Compile Include="CORE\FuzzyAHP\AllExpertJudgementMatrixs.cs" />
     <Compile Include="CORE\FuzzyAHP\MemberShipFun.cs" />
     <Compile Include="CORE\FuzzyAHP\Starndarization.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="DataBaseManager\GroupedMonitorDataByTime.cs" />
     <Compile Include="DataBaseManager\MonitorDataUtil.cs" />
     <Compile Include="DataBaseManager\TableCriteriaUtil.cs" />
+    <Compile Include="HealthEvaluationGlobals.cs" />
     <Compile Include="HealthEvaluationTool.cs" />
     <Compile Include="IndexMonPUtil.cs" />
     <Compile Include="Reliability\Reliability.cs" />
@@ -119,8 +120,17 @@
       <DependentUpon>IndexTreeUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\IndexTreeViewModel.cs" />
+    <Compile Include="UI\JudgementMatrixExpertDateListWnd.xaml.cs">
+      <DependentUpon>JudgementMatrixExpertDateListWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LookUpJudgementMatrixWnd.xaml.cs">
+      <DependentUpon>LookUpJudgementMatrixWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\JudgementMatrixWnd.xaml.cs">
       <DependentUpon>JudgementMatrixWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewJudgementMatrixWnd.xaml.cs">
+      <DependentUpon>NewJudgementMatrixWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MainWindowViewModel.cs" />
     <Compile Include="UI\TestWnd.xaml.cs">
@@ -142,7 +152,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\JudgementMatrixExpertDateListWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\LookUpJudgementMatrixWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\JudgementMatrixWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\NewJudgementMatrixWnd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

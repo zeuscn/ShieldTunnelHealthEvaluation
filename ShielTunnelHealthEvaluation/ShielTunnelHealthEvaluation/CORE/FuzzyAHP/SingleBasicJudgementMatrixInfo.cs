@@ -13,7 +13,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
     /// 单个判断矩阵
     /// </summary>
     [Serializable]
-    public class JudgementMatrixInfo
+    public class SingleBasicJudgementMatrixInfo
     {
         public List<string> IndexsSequence { get; set; }///判断矩阵对应的指标序列
         public DenseMatrix JudgementMatrix { get; set; }
@@ -25,7 +25,7 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
             get;
             set;
         }
-        public JudgementMatrixInfo()
+        public SingleBasicJudgementMatrixInfo()
         {
         }
         /// <summary>

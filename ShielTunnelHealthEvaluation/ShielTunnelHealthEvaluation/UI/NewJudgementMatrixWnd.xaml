@@ -1,4 +1,4 @@
-﻿<Window x:Class="ShieldTunnelHealthEvaluation.UI.JudgementMatrixWnd"
+﻿<Window x:Class="ShieldTunnelHealthEvaluation.UI.NewJudgementMatrixWnd"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,9 @@
             <RowDefinition Height="Auto" ></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <!--<Border x:Name="tableBorder" Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto">
+            <reoGrid:ReoGridControl x:Name="reoWeigh" Visibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"  Grid.IsSharedSizeScope="True"  ></reoGrid:ReoGridControl>
+        </Border>-->
         <Border x:Name="tableBorder" Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" Margin="10">
             <DataGrid x:Name="dgWeight" FontSize="18" RowHeight="60" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" LoadingRow="dgWeight_LoadingRow" AutoGeneratingColumn="dgWeight_AutoGeneratingColumn"  LayoutUpdated="dgWeight_LayoutUpdated">
                 <DataGrid.RowHeaderTemplate>
@@ -24,10 +27,9 @@
         </Border>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Height="40" HorizontalAlignment="Center" Margin="10" >
             <Label>专家名称</Label>
-            <TextBox x:Name="tbExpertName" Width="50" Text="{Binding ExpertName,Mode=TwoWay}"></TextBox>
+            <TextBox x:Name="tbExpertName" Width="50"></TextBox>
             <Label>打分时间</Label>
             <DatePicker></DatePicker>
-            <TextBox x:Name="tbDate" Text="{Binding Time,Mode=TwoWay}"></TextBox>
         </StackPanel>
         <Button x:Name="btnOK" Click="btnOK_Click" Grid.Row="2" Height="30" Width="50" HorizontalAlignment="Right" Margin="10">Next</Button>
     </Grid>

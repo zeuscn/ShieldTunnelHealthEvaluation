@@ -62,10 +62,10 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         private void CalculateWeightVctor()
         {
             int _judgementMatrixCount = _judgementMatrixInfosSet.JudgementMatrixInfosList.Count;
-            foreach (JudgementMatrixsSetting _judgementMatrixInfos in _judgementMatrixInfosSet.JudgementMatrixInfosList)
+            foreach (JudgementMatrixsGroup _judgementMatrixInfos in _judgementMatrixInfosSet.JudgementMatrixInfosList)
             {
-                Dictionary<string, JudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
-                foreach (KeyValuePair<string, JudgementMatrixInfo> kvp in tempMatrixInfosDic)
+                Dictionary<string, SingleBasicJudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
+                foreach (KeyValuePair<string, SingleBasicJudgementMatrixInfo> kvp in tempMatrixInfosDic)
                 {
                     DenseVector dv = kvp.Value.WeightVector;
                     List<string> childNames = kvp.Value.IndexsSequence;
@@ -138,16 +138,16 @@ namespace ShieldTunnelHealthEvaluation.CORE.FuzzyAHP
         /// <returns></returns>
         private bool IsMatrixExist()
         {
-            List<JudgementMatrixsSetting> temp = new List<JudgementMatrixsSetting>();
+            List<JudgementMatrixsGroup> temp = new List<JudgementMatrixsGroup>();
             bool result = false;
             List<int> toDeleteIndexs = new List<int>();
             int _judgementMatrixCount = _judgementMatrixInfosSet.JudgementMatrixInfosList.Count;
             for (int i = 0; i < _judgementMatrixInfosSet.JudgementMatrixInfosList.Count; i++)
             {
-                JudgementMatrixsSetting _judgementMatrixInfos = _judgementMatrixInfosSet.JudgementMatrixInfosList[i];
-                Dictionary<string, JudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
+                JudgementMatrixsGroup _judgementMatrixInfos = _judgementMatrixInfosSet.JudgementMatrixInfosList[i];
+                Dictionary<string, SingleBasicJudgementMatrixInfo> tempMatrixInfosDic = _judgementMatrixInfos.JudgeMatrixDic;
                 bool isAllMatrixExist = true;
-                foreach (KeyValuePair<string, JudgementMatrixInfo> kvp in tempMatrixInfosDic)
+                foreach (KeyValuePair<string, SingleBasicJudgementMatrixInfo> kvp in tempMatrixInfosDic)
                 {
                     if (kvp.Value == null)
                     {

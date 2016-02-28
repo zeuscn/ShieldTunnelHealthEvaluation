@@ -1,0 +1,25 @@
+﻿<Window x:Class="ShieldTunnelHealthEvaluation.UI.JudgementMatrixExpertDateListWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="JudgementMatrixExpertDateList" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" x:Name="lvJudgeMatrixDetailList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="专家名称" DisplayMemberBinding="{Binding ExpertName,Mode=TwoWay}">
+                    </GridViewColumn>
+                    <GridViewColumn Header="打分日期" DisplayMemberBinding="{Binding Time,Mode=TwoWay}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Column="1">
+            <Button x:Name="btnAdd" Margin="10" Width="50" Height="30" Click="btnAdd_Click">添加</Button>
+            <Button x:Name="btnView" Margin="10" Width="50" Height="30" Click="btnView_Click">查看</Button>
+            <Button x:Name="btnDelete" Margin="10" Width="50" Height="30" Click="btnDelete_Click">删除</Button>
+        </StackPanel>
+    </Grid>
+</Window>

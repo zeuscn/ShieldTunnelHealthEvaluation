@@ -25,50 +25,92 @@ namespace ShieldTunnelHealthEvaluation.UI
     /// <summary>
     /// JudgementMatrixUC.xaml 的交互逻辑
     /// </summary>
-    public partial class JudgementMatrixWnd : Window
+    public partial class NewJudgementMatrixWnd : Window
     {
         AllExpertJudgementMatrixs _judgementMatrixInfosSet;
-        JudgementMatrixsGroup judgemetnMatrixGroup;
+        JudgementMatrixsGroup judgemetnMatrixInfos;
         Dictionary<string, SingleBasicJudgementMatrixInfo> judgeMatrixDic;
-        int matrixNo=0;
+        int matrixNo;
         int matrixTotalNo;
         public List<string> MatrixGrade { get; set; }
         public List<string> Sequences{get;set;}
         DenseMatrix weighMatrix;
         bool isFirstAfterContextChanged = true;
-        public JudgementMatrixWnd(JudgementMatrixsGroup jmGroup)
+        public NewJudgementMatrixWnd(AHPIndexHierarchy ahpIndexHierarchy)
         {
-            //初始化参数
             MatrixGrade = new List<string> { "1/2", "1", "2"};
             InitializeComponent();
-            judgemetnMatrixGroup = jmGroup;
-            judgeMatrixDic = judgemetnMatrixGroup.JudgeMatrixDic;
+            _judgementMatrixInfosSet = BinaryIO.ReadMatrixInfosSet();//读取已有的，这个地方需要细化
+            if (_judgementMatrixInfosSet==null)//没有现成的就新建
+            {
+                _judgementMatrixInfosSet = new AllExpertJudgementMatrixs();
+            }
+            judgemetnMatrixInfos = new JudgementMatrixsGroup(ahpIndexHierarchy); //新建空的判断矩阵集
+            judgeMatrixDic = judgemetnMatrixInfos.JudgeMatrixDic;
+            //judgeMatrixDic = _judgementMatrixInfosSet.JudgementMatrixInfosList[0].JudgeMatrixDic;
+            matrixNo = 0;
             matrixTotalNo = judgeMatrixDic.Count;
-            SingleBasicJudgementMatrixInfo singleJudgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
-            this.DataContext = jmGroup;
-            //界面初始化
-            RefreshData(singleJudgemtInfo.IndexsSequence, singleJudgemtInfo.JudgementMatrix);
+            SingleBasicJudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
+            RefreshData(judgemtInfo.IndexsSequence, judgemtInfo.JudgementMatrix);
             dgWeight.CellEditEnding += dgWeight_CellEditEnding;
         }
-        private void btnOK_Click(object sender, RoutedEventArgs e)
+        public void RefreshData(List<string> sequences, DenseMatrix weighMatrix)
         {
-            //save expert name and date;
-            if (this.tbExpertName.Text =="")
+            Debug.Assert(sequences != null && sequences.Count > 0);
+            dgWeight.ItemsSource = null;
+            this.Sequences = sequences;
+            if (weighMatrix != null)
             {
-                MessageBox.Show("请输入专家名称和打分时间！");
-                return;
+                this.weighMatrix = weighMatrix;
             }
             else
             {
-                if(this.tbExpertName.IsEnabled&&this.tbDate.IsEnabled)
-                {
-                    judgemetnMatrixGroup.ExpertName = this.tbExpertName.Text;
-                    judgemetnMatrixGroup.Time = this.tbDate.Text;
-                    this.tbDate.IsEnabled = false;
-                    this.tbExpertName.IsEnabled = false;
-                }
+                this.weighMatrix = new DenseMatrix(sequences.Count);
             }
-            //保存并检验判断矩阵
+            initialData();
+        }
+        private void initialData()
+        {
+            DataTable dependedDT=CreateDT(Sequences,weighMatrix);
+            this.dgWeight.ItemsSource = dependedDT.DefaultView;
+            isFirstAfterContextChanged = true;
+        }
+        private DataTable CreateDT(List<string> headers,DenseMatrix dm)
+        {
+            var resultDT = new DataTable();
+            for(int i=0;i<headers.Count;i++)
+            {
+                resultDT.Columns.Add(new DataColumn(headers[i]));
+            }
+            for(int i=0;i<dm.RowCount;i++)
+            {
+                DataRow dr = resultDT.NewRow();
+                for(int j=0;j<dm.ColumnCount;j++)
+                {
+                    if(i==j)//强制为1
+                    {
+                        dr[j] = 1;
+                        continue;
+                    }
+                    else if (dm[i, j]==0)
+                    {
+                        dr[j] = 1;
+                    }
+                    else
+                    {
+                        string tempGrade;
+                        if(ConvertDouble2MatrixGrade(dm[i,j],out tempGrade))
+                        {
+                            dr[j] = tempGrade;
+                        }
+                    }
+                }
+                resultDT.Rows.Add(dr);
+            }
+            return resultDT;
+        }
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
             weighMatrix = new DenseMatrix(Sequences.Count);
             for (int i = 0; i < Sequences.Count; i++)
             {
@@ -98,23 +140,20 @@ namespace ShieldTunnelHealthEvaluation.UI
                 MessageBox.Show("未通过一致性检验！");
                 return;
             }
-            //准备下一个
             matrixNo++;
-            //读取下一个
             SingleBasicJudgementMatrixInfo judgemtInfo = judgeMatrixDic.ElementAt(matrixNo).Value;
             NextMatrix:
-            if (matrixNo < matrixTotalNo)//下一个没结束
+            if (matrixNo < matrixTotalNo)
             {
                 if (judgemtInfo.IndexsSequence.Count== 1) //一个元素的，跳过，并赋值
                 {
-                    //保存下一个为1
                     judgeMatrixDic.ElementAt(matrixNo).Value.JudgementMatrix = new DenseMatrix(1,1,new double[]{1});
                     judgeMatrixDic.ElementAt(matrixNo).Value.CalculateEigenVector();
-                    matrixNo++;//跳过后的下一个
+                    matrixNo++;//接下来继续
                     goto NextMatrix;
                 }
             }
-            //不为一个元素,且是最后一个
+            //不为一个元素,切实最后一个
             if (matrixNo == matrixTotalNo - 1)//如果是最后一个
             {
                 this.btnOK.Content = "完成";
@@ -125,8 +164,8 @@ namespace ShieldTunnelHealthEvaluation.UI
             //没了
             if (matrixNo >= matrixTotalNo)//如果没了
             {
-                //_judgementMatrixInfosSet.JudgementMatrixInfosList.Add(judgemetnMatrixGroup);
-                //BinaryIO.OutputMatrixInfosSet(_judgementMatrixInfosSet);
+                _judgementMatrixInfosSet.JudgementMatrixInfosList.Add(judgemetnMatrixInfos);
+                BinaryIO.OutputMatrixInfosSet(_judgementMatrixInfosSet);
                 this.Close();
                 return;
             }
@@ -181,72 +220,6 @@ namespace ShieldTunnelHealthEvaluation.UI
             var toModifyCmBox=(ComboBox) toModifyCell.Content;
             toModifyCmBox.SelectedIndex = this.MatrixGrade.Count-1-originSeletectedIndex;
         }
-        private void dgWeight_LayoutUpdated(object sender, EventArgs e)
-        {
-            if (isFirstAfterContextChanged)
-            {
-                SetDiagonalUnediteable();
-                isFirstAfterContextChanged = false;
-            }
-        }
-        #region helper
-
-        //下一次一下内容尽量不要放到UI类中
-        private void RefreshData(List<string> sequences, DenseMatrix weighMatrix)
-        {
-            Debug.Assert(sequences != null && sequences.Count > 0);
-            dgWeight.ItemsSource = null;
-            this.Sequences = sequences;
-            if (weighMatrix != null)
-            {
-                this.weighMatrix = weighMatrix;
-            }
-            else
-            {
-                this.weighMatrix = new DenseMatrix(sequences.Count);
-            }
-            initialData();
-        }
-        private void initialData()
-        {
-            DataTable dependedDT = CreateDT(Sequences, weighMatrix);
-            this.dgWeight.ItemsSource = dependedDT.DefaultView;
-            isFirstAfterContextChanged = true;
-        }
-        private DataTable CreateDT(List<string> headers, DenseMatrix dm)
-        {
-            var resultDT = new DataTable();
-            for (int i = 0; i < headers.Count; i++)
-            {
-                resultDT.Columns.Add(new DataColumn(headers[i]));
-            }
-            for (int i = 0; i < dm.RowCount; i++)
-            {
-                DataRow dr = resultDT.NewRow();
-                for (int j = 0; j < dm.ColumnCount; j++)
-                {
-                    if (i == j)//强制为1
-                    {
-                        dr[j] = 1;
-                        continue;
-                    }
-                    else if (dm[i, j] == 0)
-                    {
-                        dr[j] = 1;
-                    }
-                    else
-                    {
-                        string tempGrade;
-                        if (ConvertDouble2MatrixGrade(dm[i, j], out tempGrade))
-                        {
-                            dr[j] = tempGrade;
-                        }
-                    }
-                }
-                resultDT.Rows.Add(dr);
-            }
-            return resultDT;
-        }
         private void SetDiagonalUnediteable()
         {
             for(int i=0;i<this.Sequences.Count;i++)
@@ -255,6 +228,16 @@ namespace ShieldTunnelHealthEvaluation.UI
                 diagonalCell.IsEnabled = false;
             }
         }
+
+        private void dgWeight_LayoutUpdated(object sender, EventArgs e)
+        {
+            if(isFirstAfterContextChanged)
+            {
+                SetDiagonalUnediteable();
+                isFirstAfterContextChanged = false;
+            }
+        }
+
         private bool ConvertMatrixGrade2Double(string grade,out double result)
         {
             if(grade.Contains('/'))
@@ -297,6 +280,5 @@ namespace ShieldTunnelHealthEvaluation.UI
             grade = "error";
             return false;
         }
-        #endregion
     }
 }

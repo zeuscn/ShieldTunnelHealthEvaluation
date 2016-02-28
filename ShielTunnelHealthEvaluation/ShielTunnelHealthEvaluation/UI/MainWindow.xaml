@@ -89,7 +89,8 @@
             <GroupBox Header="更改设置" Grid.Row="0">
                 <StackPanel Orientation="Vertical"  HorizontalAlignment="Center">
                     <Button x:Name="btnSetting"  Click="btnSetting_Click" Width="70" Height="30" Margin="5">基本设置</Button>
-                    <Button x:Name="btnWeight" Click="btnWeight_Click" Width="70" Height="30" Margin="5">修改权重</Button>
+                    <Button x:Name="btnAddWeight" Click="btnAddWeight_Click" Width="70" Height="30" Margin="5">添加权重</Button>
+                    <Button x:Name="btnLookUpWeight" Click="btnLookUpWeight_Click" Width="70" Height="30" Margin="5">查看权重</Button>
                     <Button x:Name="btnCriterias" Click="btnCriterias_Click" Width="70" Height="30" Margin="5">修改分级</Button>
                     <Button x:Name="btnResult" Click="btnResult_Click" Width="70" Height="30" Margin="5">结果</Button>
                     <Button x:Name="btnTestt" Visibility="Hidden" Click="btnTestt_Click" Width="70" Height="30" Margin="5">测试datatable序列化</Button>

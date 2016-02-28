@@ -29,7 +29,7 @@ namespace ShieldTunnelHealthEvaluation
              viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
             InitializeComponent();
-            
+            HealthEvaluationGlobals.MyAHPIndexHierarchys = this.viewModel.MyAHPIndexHierarchys;//临时的全局化方案，后面再整体修改
 
             AHPIndexHierarchyUtil ahpHierarchyUtil = new AHPIndexHierarchyUtil(this.viewModel.MyAHPIndexHierarchys[0]);
             var model = new TreeModel<AHPIndexHierarchy, string>();
@@ -45,11 +45,6 @@ namespace ShieldTunnelHealthEvaluation
 
         }
 
-        private void btnWeight_Click(object sender, RoutedEventArgs e)
-        {
-            JudgementMatrixWnd weightWnd = new JudgementMatrixWnd(viewModel.MyAHPIndexHierarchys[0]);
-            weightWnd.Show();
-        }
 
         private void btnTestt_Click(object sender, RoutedEventArgs e)
         {
@@ -85,6 +80,20 @@ namespace ShieldTunnelHealthEvaluation
         private void btnCalculateHealthState_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnAddWeight_Click(object sender, RoutedEventArgs e)
+        {
+            //NewJudgementMatrixWnd weightWnd = new NewJudgementMatrixWnd(viewModel.MyAHPIndexHierarchys[0]);
+            //weightWnd.Show();
+        }
+
+        private void btnLookUpWeight_Click(object sender, RoutedEventArgs e)
+        {
+            //LookUpJudgementMatrixWnd weightWnd = new LookUpJudgementMatrixWnd(viewModel.MyAHPIndexHierarchys[0]);
+            //weightWnd.Show();
+            JudgementMatrixExpertDateListWnd _judgementMatrixListWnd = new JudgementMatrixExpertDateListWnd();
+            _judgementMatrixListWnd.Show();
         }
     }
 }
