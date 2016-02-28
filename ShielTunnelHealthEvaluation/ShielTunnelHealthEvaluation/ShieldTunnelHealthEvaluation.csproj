@@ -112,6 +112,7 @@
     <Compile Include="UI\CriteriaSettingWnd.xaml.cs">
       <DependentUpon>CriteriaSettingWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DatagridPlus.cs" />
     <Compile Include="UI\FormsCharting.cs" />
     <Compile Include="UI\GradeColorConverter.cs" />
     <Compile Include="UI\IndexTreeUserControl.xaml.cs">

@@ -15,7 +15,7 @@
             <reoGrid:ReoGridControl x:Name="reoWeigh" Visibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"  Grid.IsSharedSizeScope="True"  ></reoGrid:ReoGridControl>
         </Border>-->
         <Border x:Name="tableBorder" Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" Margin="10">
-            <DataGrid x:Name="dgWeight" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="True" CanUserResizeColumns="False" LoadingRow="dgWeight_LoadingRow" FontSize="18" AutoGeneratingColumn="dgWeight_AutoGeneratingColumn">
+            <DataGrid x:Name="dgWeight" FontSize="18" RowHeight="60" HorizontalAlignment="Center" HorizontalContentAlignment="Center" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" LoadingRow="dgWeight_LoadingRow" AutoGeneratingColumn="dgWeight_AutoGeneratingColumn"  LayoutUpdated="dgWeight_LayoutUpdated">
                 <DataGrid.RowHeaderTemplate>
                     <DataTemplate>
                         <TextBlock  Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
